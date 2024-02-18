@@ -1,8 +1,9 @@
 // Set up
 const express = require("express");
-const usersRoute = require("./routes/users/usersRoute");
-const coffeeshopsRoute = require("./routes/coffeeshops/coffeeshopsRoute");
-const dotenv = require('dotenv').config();
+const usersRoute = require("./routes/usersRoute");
+const coffeeshopsRoute = require("./routes/coffeeshopsRoute");
+const reviewsRoute = require("./routes/reviewsRoute");
+const dotenv = require("dotenv").config();
 const PORT = process.env.PORT;
 
 const app = express();
@@ -10,36 +11,9 @@ const app = express();
 // Middlewares
 
 // Routes
-app.use('/api/users', usersRoute);
-app.use('/api/coffeeshops', coffeeshopsRoute);
-
-// Reviews routes
-// GET/api/reviews/:id
-app.get("/api/reviews/:id", async (req,res) => {
-    try {
-        res.json({msg: "Get a specific review route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// PUT/api/reviews/:id
-app.put("/api/reviews/:id", async (req,res) => {
-    try {
-        res.json({msg: "Update a specific review route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// DELETE/api/reviews/:id
-app.delete("/api/reviews/:id", async (req,res) => {
-    try {
-        res.json({msg: "Delete a specific review route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
+app.use("/api/users", usersRoute);
+app.use("/api/coffeeshops", coffeeshopsRoute);
+app.use("/api/reviews", reviewsRoute);
 
 // Bookmarks routes
 // GET/api/bookmarks
