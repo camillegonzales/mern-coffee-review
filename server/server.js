@@ -1,5 +1,7 @@
 // Set up
 const express = require("express");
+const usersRoute = require("./routes/users/usersRoute");
+const coffeeshopsRoute = require("./routes/coffeeshops/coffeeshopsRoute");
 const dotenv = require('dotenv').config();
 const PORT = process.env.PORT;
 
@@ -8,106 +10,8 @@ const app = express();
 // Middlewares
 
 // Routes
-// Users routes
-// POST/api/users/register
-app.post("/api/users/register", async (req,res) => {
-    try {
-        res.json({msg: "Register user route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// POST/api/users/login
-app.post("/api/users/login", async (req,res) => {
-    try {
-        res.json({msg: "Login user route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// GET/api/users/profile/:id
-app.get("/api/users/profile/:id", async (req,res) => {
-    try {
-        res.json({msg: "User profile route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// DELETE/api/users/:id
-app.delete("/api/users/:id", async (req,res) => {
-    try {
-        res.json({msg: "Delete user route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// PUT/api/users/:id
-app.put("/api/users/:id", async (req,res) => {
-    try {
-        res.json({msg: "Update user route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// Coffee shops routes
-// POST/api/coffeeshops 
-app.post("/api/users/coffeeshops", async (req,res) => {
-    try {
-        res.json({msg: "Add new coffee shop route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// GET/api/coffeeshops
-app.get("/api/users/coffeeshops", async (req,res) => {
-    try {
-        res.json({msg: "Get all coffee shops route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// GET/api/coffeeshops/:id
-app.get("/api/users/coffeeshops/:id", async (req,res) => {
-    try {
-        res.json({msg: "Get a specific coffee shop route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// PUT/api/coffeeshops/:id
-app.put("/api/users/coffeeshops/:id", async (req,res) => {
-    try {
-        res.json({msg: "Update a specific coffee shop route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// DELETE/api/coffeeshops/:id
-app.delete("/api/users/coffeeshops/:id", async (req,res) => {
-    try {
-        res.json({msg: "Update a specific coffee shop route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
-
-// POST/api/coffeeshops/:id/reviews
-app.post("/api/users/coffeeshops/:id", async (req,res) => {
-    try {
-        res.json({msg: "Add a review to a specific coffee shop route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
+app.use('/api/users', usersRoute);
+app.use('/api/coffeeshops', coffeeshopsRoute);
 
 // Reviews routes
 // GET/api/reviews/:id
