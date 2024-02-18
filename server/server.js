@@ -101,7 +101,7 @@ app.delete("/api/users/coffeeshops/:id", async (req,res) => {
 });
 
 // POST/api/coffeeshops/:id/reviews
-app.POST("/api/users/coffeeshops/:id", async (req,res) => {
+app.post("/api/users/coffeeshops/:id", async (req,res) => {
     try {
         res.json({msg: "Add a review to a specific coffee shop route"});
     } catch (error) {
