@@ -1,31 +1,18 @@
 const express = require("express");
+const { 
+    getReviewCtrl,
+    updateReviewCtrl,
+    deleteReviewCtrl
+} = require("../controllers/reviewsCtrl");
 const reviewsRoute = express.Router();
 
 // GET/api/reviews/:id
-reviewsRoute.get("/:id", async (req,res) => {
-    try {
-        res.json({msg: "Get a specific review route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
+reviewsRoute.get("/:id", getReviewCtrl);
 
 // PUT/api/reviews/:id
-reviewsRoute.put("/:id", async (req,res) => {
-    try {
-        res.json({msg: "Update a specific review route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
+reviewsRoute.put("/:id", updateReviewCtrl);
 
 // DELETE/api/reviews/:id
-reviewsRoute.delete("/:id", async (req,res) => {
-    try {
-        res.json({msg: "Delete a specific review route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
+reviewsRoute.delete("/:id", deleteReviewCtrl);
 
 module.exports = reviewsRoute; 
