@@ -24,9 +24,11 @@ const registerUserCrtl = async (req,res) => {
                 error: "Password must be at least 6 characters"
             });
         }
+
         // Hash password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
+
         // Create user
         const user = await User.create({
             userName,
@@ -44,10 +46,28 @@ const registerUserCrtl = async (req,res) => {
 
 // Login user
 const userLoginCtrl = async (req,res) => {
+    const {email, password} = req.body;
     try {
         // Check if email exists
+        const userFound = await User.findOne({email});
+        if (!userFound) {
+            return res.json({
+                error: "Invalid login credentials"
+            });
+        }
 
-        res.json({msg: "Login user route"});
+        // Check if password is correct
+        const isPasswordMatch = await bcrypt.compare(password, userFound.password);
+        if (!isPasswordMatch) {
+            return res.json({
+                error: "Invalid login credentials"
+            });
+        }
+
+        res.json({
+            status: "success",
+            userFound
+        });
     } catch (error) {
         res.json(error);
     }
