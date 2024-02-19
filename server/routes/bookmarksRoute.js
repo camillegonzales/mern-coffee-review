@@ -1,31 +1,18 @@
 const express = require("express");
+const { 
+    getBookmarksCtrl,
+    addBookmarkCtrl,
+    removeBookmarkCtrl
+} = require("../controllers/bookmarksCtrl");
 const bookmarksRoute = express.Router();
 
 // GET/api/bookmarks
-bookmarksRoute.get("/", async (req,res) => {
-    try {
-        res.json({msg: "Get all bookmarks for user route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
+bookmarksRoute.get("/", getBookmarksCtrl);
 
 // POST/api/bookmarks
-bookmarksRoute.post("/", async (req,res) => {
-    try {
-        res.json({msg: "Add coffee shop to user's bookmarks route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
+bookmarksRoute.post("/", addBookmarkCtrl);
 
 // DELETE/api/bookmarks/:coffeeShopId
-bookmarksRoute.delete("/:coffeeShopId", async (req,res) => {
-    try {
-        res.json({msg: "Remove a coffee shop from user's bookmarks route"});
-    } catch (error) {
-        res.json(error);
-    }
-});
+bookmarksRoute.delete("/:coffeeShopId", removeBookmarkCtrl);
 
 module.exports = bookmarksRoute;
