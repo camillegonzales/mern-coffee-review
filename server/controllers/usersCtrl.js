@@ -18,6 +18,7 @@ const registerUserCrtl = async (req,res) => {
                 error: "All fields are required"
             });
         }
+        // Check if password is valid
         if (password.length < 6) {
             return res.json({
                 error: "Password must be at least 6 characters"
@@ -44,6 +45,8 @@ const registerUserCrtl = async (req,res) => {
 // Login user
 const userLoginCtrl = async (req,res) => {
     try {
+        // Check if email exists
+
         res.json({msg: "Login user route"});
     } catch (error) {
         res.json(error);
