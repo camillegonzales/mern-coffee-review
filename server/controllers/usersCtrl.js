@@ -78,8 +78,12 @@ const userLoginCtrl = async (req,res) => {
 
 // User profile
 const userProfileCtrl = async (req,res) => {
-    const result = verifyToken();
+    // Get token from header
+    const headerObj = req.headers;
+    const token = headerObj["authorization"].split(" ")[1];
+    const result = verifyToken(token);
     console.log(result);
+    
     try {
         res.json({msg: "User profile route"});
     } catch (error) {
