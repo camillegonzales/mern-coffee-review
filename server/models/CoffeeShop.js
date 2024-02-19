@@ -15,6 +15,6 @@ const coffeeShopSchema = new mongoose.Schema({
 });
 
 // Coffee shop model
-const CoffeeShop = mongoose.model("User", userSchema)
+const CoffeeShop = mongoose.model("CoffeeShop", coffeeShopSchema);
 
 module.exports = CoffeeShop;
