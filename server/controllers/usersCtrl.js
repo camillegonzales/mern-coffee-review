@@ -34,8 +34,7 @@ const registerUserCrtl = async (req,res) => {
         });
         res.json({
             status: "Success",
-            userName: user.userName,
-            id: user._id,
+            user,
         });
     } catch (error) {
         res.json(error);
