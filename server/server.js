@@ -1,5 +1,6 @@
 // Set up
 const express = require("express");
+require("./config/dbConnect");
 const usersRoute = require("./routes/usersRoute");
 const coffeeshopsRoute = require("./routes/coffeeshopsRoute");
 const reviewsRoute = require("./routes/reviewsRoute");
