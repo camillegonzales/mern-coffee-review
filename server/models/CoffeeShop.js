@@ -6,11 +6,11 @@ const coffeeShopSchema = new mongoose.Schema({
     neighborhood: { type: String, required: true },
     address: { type: String, required: true },
     image: { type: String },
-    coffeeRating: { type: Number, min: 0, max: 5, default: 0 },
-    foodRating: { type: Number, min: 0, max: 5, default: 0 },
-    seatingRating: { type: Number, min: 0, max: 5, default: 0 },
-    chargingRating: { type: Number, min: 0, max: 5, default: 0 },
-    noiseRating: { type: Number, min: 0, max: 5, default: 0 },
+    coffeeRating: { type: Number, min: 1, max: 5, required: true},
+    foodRating: { type: Number, min: 1, max: 5, required: true },
+    seatingRating: { type: Number, min: 1, max: 5, required: true},
+    chargingRating: { type: Number, min: 1, max: 5, required: true },
+    noiseRating: { type: Number, min: 1, max: 5, required: true },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 });
 
