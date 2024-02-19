@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     userName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Coffeeshop' }],
+    bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'CoffeeShop' }],
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
 }, {
     timestamps: true,
