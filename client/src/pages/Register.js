@@ -1,7 +1,7 @@
 const Register = () => {
     return (
       <div>
-            <h1>Login</h1>
+            <h1>Sign up</h1>
             <form>
                 <label>Name</label>
                 <input type='text' placeholder='Enter full name...' />
