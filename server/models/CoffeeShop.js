@@ -12,6 +12,9 @@ const coffeeShopSchema = new mongoose.Schema({
     chargingRating: { type: Number, min: 1, max: 5, default: null },
     noiseRating: { type: Number, min: 1, max: 5, default: null },
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }]
+}, {
+    timestamps: true,
+    toJSON: { virtuals: true }
 });
 
 // Coffee shop model
