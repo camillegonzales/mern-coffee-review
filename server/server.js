@@ -32,7 +32,5 @@ app.use("/api/coffeeshops", coffeeshopsRoute);
 app.use("/api/reviews", reviewsRoute);
 app.use("/api/bookmarks", bookmarksRoute);
 
-// Error handlers
-
 // Listener
 app.listen(PORT, console.log(`Server is running on port ${PORT}`));
