@@ -15,7 +15,7 @@ const app = express();
 const dbConnect = async () => {
     try {
         await mongoose.connect(MONGO_URL);
-        console.log("Successfully connected to database")
+        console.log("Connected to database");
     } catch (error) {
         console.log("Failed to connect to database", error); 
         process.exit(1);
@@ -34,4 +34,4 @@ app.use("/api/bookmarks", bookmarksRoute);
 // Error handlers
 
 // Listener
-app.listen(PORT, console.log(`Server is runnin on port ${PORT}`));
+app.listen(PORT, console.log(`Server is running on port ${PORT}`));
