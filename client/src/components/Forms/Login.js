@@ -1,9 +1,14 @@
-import React from "react";
-
 const Login = () => {
   return (
     <div>
-      Login
+        <h1>Login</h1>
+        <form>
+            <label>Email</label>
+            <input type='email' placeholder='Enter email...' />
+            <label>Password</label>
+            <input type='password' placeholder='Enter password...' />
+            <button type='submit'>Login</button>
+        </form>
     </div>
   );
 };
