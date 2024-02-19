@@ -1,7 +1,42 @@
+const bcrypt = require("bcryptjs");
+const User = require("../models/User");
+
 // Register user
 const registerUserCrtl = async (req,res) => {
+    const {userName, email, password} = req.body;
     try {
-        res.json({msg: "Register user route"});
+        // Check if email exists
+        const userFound = await User.findOne({email});
+        if (userFound) {
+            return res.json({
+                error: "Email already in use"
+            });
+        }
+        // Check if any fields are empty
+        if (!userName || !email || !password) {
+            return res.json({
+                error: "All fields are required"
+            });
+        }
+        if (password.length < 6) {
+            return res.json({
+                error: "Password must be at least 6 characters"
+            });
+        }
+        // Hash password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        // Create user
+        const user = await User.create({
+            userName,
+            email,
+            password: hashedPassword,
+        });
+        res.json({
+            status: "Success",
+            userName: user.userName,
+            id: user._id,
+        });
     } catch (error) {
         res.json(error);
     }

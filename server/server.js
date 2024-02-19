@@ -24,6 +24,7 @@ const dbConnect = async () => {
 dbConnect();
 
 // Middlewares
+app.use(express.json());
 
 // Routes
 app.use("/api/users", usersRoute);
