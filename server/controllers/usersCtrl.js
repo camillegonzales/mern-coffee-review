@@ -89,7 +89,11 @@ const userProfileCtrl = async (req,res) => {
 // Delete user
 const deleteUserCtrl = async (req,res) => {
     try {
-        res.json({msg: "Delete user route"});
+        await User.findByIdAndDelete(req.user);
+        res.status(200).json({
+            status: "success",
+            data: null
+        });
     } catch (error) {
         res.json(error);
     }
@@ -98,7 +102,46 @@ const deleteUserCtrl = async (req,res) => {
 // Update user
 const updateUserCtrl = async (req,res) => {
     try {
-        res.json({msg: "Update user route"});
+        // Check if email exists
+        if (req.body.email) {
+            const userFound = await User.findOne({email: req.body.email});
+            if (userFound) {
+                return res.json({
+                    error: "Email already in use"
+                });
+            } 
+        }
+        
+        // Check if user is updating the password
+        if (req.body.password) {
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+            // Update the user
+            const user = await User.findByIdAndUpdate(
+                req.user,
+                {
+                    password: hashedPassword,
+                },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            );
+            return res.status(200).json({
+                status: "success",
+                data: user,
+            });
+        }
+
+        const user = await User.findByIdAndUpdate(req.user, req.body, {
+            new: true,
+            runValidators: true,
+        });
+        res.status(200).json({
+            status: "success",
+            data: user,
+        });
     } catch (error) {
         res.json(error);
     }
