@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
-const verifyToken = require("../utils/verifyToken");
 
 // Register user
 const registerUserCrtl = async (req,res) => {
@@ -78,14 +77,10 @@ const userLoginCtrl = async (req,res) => {
 
 // User profile
 const userProfileCtrl = async (req,res) => {
-    // Get token from header
-    const headerObj = req.headers;
-    const token = headerObj["authorization"].split(" ")[1];
-    const result = verifyToken(token);
-    console.log(result);
-    
+    console.log(req.user);
     try {
-        res.json({msg: "User profile route"});
+        const user = await User.findById(req.user);
+        res.json(user);
     } catch (error) {
         res.json(error);
     }

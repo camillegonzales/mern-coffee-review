@@ -6,6 +6,7 @@ const {
     deleteUserCtrl,
     updateUserCtrl,
 } = require("../controllers/usersCtrl");
+const isLogin = require("../middlewares/isLogin");
 const usersRoute = express.Router();
 
 
@@ -15,8 +16,8 @@ usersRoute.post('/register', registerUserCrtl);
 // POST/api/users/login
 usersRoute.post("/login", userLoginCtrl);
 
-// GET/api/users/profile/:id
-usersRoute.get("/profile/:id", userProfileCtrl);
+// GET/api/users/profile
+usersRoute.get("/profile", isLogin, userProfileCtrl);
 
 // DELETE/api/users/:id
 usersRoute.delete("/:id", deleteUserCtrl);
