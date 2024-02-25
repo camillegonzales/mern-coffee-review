@@ -1,7 +1,37 @@
+const CoffeeShop = require("../models/CoffeeShop");
+const Review = require("../models/Review");
+
 // Create coffee shop
 const createShopCtrl = async (req,res) => {
+    const {
+        name,
+        neighborhood,
+        address,
+        image,
+        coffeeRating,
+        foodRating,
+        seatingRating,
+        chargingRating,
+        noiseRating,
+        reviews
+    } = req.body;
     try {
-        res.json({msg: "Add new coffee shop route"});
+        const coffeeShop = await CoffeeShop.create({
+            name,
+            neighborhood,
+            address,
+            image,
+            coffeeRating,
+            foodRating,
+            seatingRating,
+            chargingRating,
+            noiseRating,
+            reviews
+        })
+        res.json({
+            status: "success",
+            data: coffeeShop
+        });
     } catch (error) {
         res.json(error);
     }
