@@ -10,19 +10,19 @@ const isLogin = require("../middlewares/isLogin");
 const usersRoute = express.Router();
 
 
-// POST/api/users/register
+// POST/users/register
 usersRoute.post('/register', registerUserCrtl);
 
-// POST/api/users/login
+// POST/users/login
 usersRoute.post("/login", userLoginCtrl);
 
-// GET/api/users/profile
+// GET/users/profile
 usersRoute.get("/profile", isLogin, userProfileCtrl);
 
-// DELETE/api/users
+// DELETE/users
 usersRoute.delete("/", isLogin, deleteUserCtrl);
 
-// PUT/api/users
+// PUT/users
 usersRoute.put("/", isLogin, updateUserCtrl);
 
 module.exports = usersRoute;

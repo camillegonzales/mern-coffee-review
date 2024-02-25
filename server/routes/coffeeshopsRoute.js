@@ -9,22 +9,22 @@ const {
 } = require("../controllers/coffeeshopsCtrl")
 const coffeeshopsRoute = express.Router();
 
-// POST/api/coffeeshops 
+// POST/coffeeshops 
 coffeeshopsRoute.post("/", createShopCtrl);
 
-// GET/api/coffeeshops
+// GET/coffeeshops
 coffeeshopsRoute.get("/", getShopsCtrl);
 
-// GET/api/coffeeshops/:id
+// GET/coffeeshops/:id
 coffeeshopsRoute.get("/:id", getShopCtrl);
 
-// PUT/api/coffeeshops/:id
+// PUT/coffeeshops/:id
 coffeeshopsRoute.put("/:id", updateShopCtrl);
 
-// DELETE/api/coffeeshops/:id
+// DELETE/coffeeshops/:id
 coffeeshopsRoute.delete("/:id", deleteShopCtrl);
 
-// POST/api/coffeeshops/:id/reviews
+// POST/coffeeshops/:id/reviews
 coffeeshopsRoute.post("/:id/reviews", addShopReviewCtrl);
 
 

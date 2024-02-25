@@ -6,13 +6,13 @@ const {
 } = require("../controllers/bookmarksCtrl");
 const bookmarksRoute = express.Router();
 
-// GET/api/bookmarks
+// GET/bookmarks
 bookmarksRoute.get("/", getBookmarksCtrl);
 
-// POST/api/bookmarks
+// POST/bookmarks
 bookmarksRoute.post("/", addBookmarkCtrl);
 
-// DELETE/api/bookmarks/:coffeeShopId
+// DELETE/bookmarks/:coffeeShopId
 bookmarksRoute.delete("/:coffeeShopId", removeBookmarkCtrl);
 
 module.exports = bookmarksRoute;
