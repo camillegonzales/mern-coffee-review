@@ -1,10 +1,14 @@
 const express = require("express");
 const { 
+    createReviewCtrl,
     getReviewCtrl,
     updateReviewCtrl,
     deleteReviewCtrl
 } = require("../controllers/reviewsCtrl");
 const reviewsRoute = express.Router();
+
+// POST/reviews
+reviewsRoute.post("/", createReviewCtrl);
 
 // GET/api/reviews/:id
 reviewsRoute.get("/:id", getReviewCtrl);

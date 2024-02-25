@@ -1,3 +1,15 @@
+const Review = require("../models/Review");
+
+// Create review
+const createReviewCtrl = async (req,res) => {
+    try {
+        res.json({msg: "Add new review route"});
+    } catch (error) {
+        res.json(error);
+    }
+};
+
+
 // Get single review
 const getReviewCtrl = async (req,res) => {
     try {
@@ -26,6 +38,7 @@ const deleteReviewCtrl = async (req,res) => {
 };
 
 module.exports = {
+    createReviewCtrl,
     getReviewCtrl,
     updateReviewCtrl,
     deleteReviewCtrl
