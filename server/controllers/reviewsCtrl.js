@@ -25,7 +25,7 @@ const createReviewCtrl = async (req,res) => {
         }
 
         // 2. Find the coffee shop
-        const coffeeShopFound = await CoffeeShop.findById(req.coffeeShop);
+        const coffeeShopFound = await CoffeeShop.findById(coffeeShop);
         if (!coffeeShopFound) {
             return res.json({
                 error: "Coffee shop not found"
