@@ -1,3 +1,4 @@
+const CoffeeShop = require("../models/CoffeeShop");
 const Review = require("../models/Review");
 const User = require("../models/User");
 
@@ -14,6 +15,7 @@ const createReviewCtrl = async (req,res) => {
             noiseRating,
             comment
         } = req.body;
+
         // 1. Find the logged in user
         const userFound = await User.findById(req.user);
         if (!userFound) {
@@ -21,10 +23,19 @@ const createReviewCtrl = async (req,res) => {
                 error: "Please login to proceed"
             });
         }
-        // 2. Create the review
+
+        // 2. Find the coffee shop
+        const coffeeShopFound = await CoffeeShop.findById(req.coffeeShop);
+        if (!coffeeShopFound) {
+            return res.json({
+                error: "Coffee shop not found"
+            });
+        }
+
+        // 3. Create the review
         const review = await Review.create({
-            user: req.user,
-            coffeeShop,
+            user: userFound._id,
+            coffeeShop: coffeeShopFound._id,
             coffeeRating,
             foodRating,
             seatingRating,
@@ -32,10 +43,15 @@ const createReviewCtrl = async (req,res) => {
             noiseRating,
             comment
         });
-        // 3. Push the review in to the user's reviews field
+
+        // 4. Push the review in to the user's reviews field
         userFound.reviews.push(review._id);
-        // 4. Save the user
         await userFound.save()
+
+        // 5. Push the review in to the coffeeshop's reviews field
+        coffeeShopFound.reviews.push(review._id);
+        await coffeeShopFound.save();
+
         res.json({
             status: "success",
             data: review
