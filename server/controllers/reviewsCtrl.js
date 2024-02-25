@@ -61,11 +61,19 @@ const createReviewCtrl = async (req,res) => {
     }
 };
 
-
 // Get single review
 const getReviewCtrl = async (req,res) => {
     try {
-        res.json({msg: "Get a specific review route"});
+        const review = await Review.findById(req.params.id)
+        if (!review) {
+            return res.json({ 
+                error: "Review not found" 
+            });
+        }
+        res.json({
+            status: "success",
+            data: review
+        });
     } catch (error) {
         res.json(error);
     }
