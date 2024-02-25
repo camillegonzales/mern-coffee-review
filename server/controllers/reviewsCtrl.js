@@ -1,9 +1,45 @@
 const Review = require("../models/Review");
+const User = require("../models/User");
 
 // Create review
 const createReviewCtrl = async (req,res) => {
     try {
-        res.json({msg: "Add new review route"});
+        const {
+            user,
+            coffeeShop,
+            coffeeRating,
+            foodRating,
+            seatingRating,
+            chargingRating,
+            noiseRating,
+            comment
+        } = req.body;
+        // 1. Find the logged in user
+        const userFound = await User.findById(req.user);
+        if (!userFound) {
+            return res.json({
+                error: "Please login to proceed"
+            });
+        }
+        // 2. Create the review
+        const review = await Review.create({
+            user: req.user,
+            coffeeShop,
+            coffeeRating,
+            foodRating,
+            seatingRating,
+            chargingRating,
+            noiseRating,
+            comment
+        });
+        // 3. Push the review in to the user's reviews field
+        userFound.reviews.push(review._id);
+        // 4. Save the user
+        await userFound.save()
+        res.json({
+            status: "success",
+            data: review
+        });
     } catch (error) {
         res.json(error);
     }
