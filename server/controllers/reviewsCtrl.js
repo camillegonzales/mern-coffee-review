@@ -63,8 +63,9 @@ const createReviewCtrl = async (req,res) => {
 
 // Get single review
 const getReviewCtrl = async (req,res) => {
+    const id = req.params.id
     try {
-        const review = await Review.findById(req.params.id)
+        const review = await Review.findById(id)
         if (!review) {
             return res.json({ 
                 error: "Review not found" 
@@ -81,8 +82,36 @@ const getReviewCtrl = async (req,res) => {
 
 // Update review
 const updateReviewCtrl = async (req,res) => {
+    const id = req.params.id
     try {
-        res.json({msg: "Update a specific review route"});
+        const { 
+            coffeeRating, 
+            foodRating, 
+            seatingRating, 
+            chargingRating, 
+            noiseRating, 
+            comment 
+        } = req.body;
+
+        // Find the review by ID and update it
+        const updatedReview = await Review.findByIdAndUpdate(id, {
+            coffeeRating,
+            foodRating,
+            seatingRating,
+            chargingRating,
+            noiseRating,
+            comment
+        }, { new: true });
+
+        if (!updatedReview) {
+            return res.json({ 
+                error: "Review not found" 
+            });
+        }
+        res.json({
+            status: "success",
+            data: updatedReview
+        });
     } catch (error) {
         res.json(error);
     }
