@@ -25,8 +25,8 @@ const AuthContextProvider = ({children}) => {
     const loginUserAction = async(formData) => {
         const config = {
             headers: {
-                "Content-Type:": "application/json"
-            }
+                'Content-Type': 'application/json'
+            },
         };
         try {
             const res = await axios.post(
