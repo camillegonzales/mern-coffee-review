@@ -1,5 +1,6 @@
 // Set up
 const express = require("express");
+const cors = require("cors");
 const usersRoute = require("./routes/usersRoute");
 const coffeeshopsRoute = require("./routes/coffeeshopsRoute");
 const reviewsRoute = require("./routes/reviewsRoute");
@@ -25,6 +26,7 @@ dbConnect();
 
 // Middlewares
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use("/users", usersRoute);
