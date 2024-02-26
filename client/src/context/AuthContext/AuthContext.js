@@ -1,6 +1,12 @@
 import { createContext, useReducer } from "react";
 import axios from "axios";
-import { LOGIN_SUCCESS, LOGIN_FAILED, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAIL } from "./authActionTypes";
+import { 
+    LOGIN_SUCCESS, 
+    LOGIN_FAILED, 
+    FETCH_PROFILE_SUCCESS, 
+    FETCH_PROFILE_FAIL, 
+    LOGOUT 
+} from "./authActionTypes";
 import { URL_USER } from "../../utils/URL";
 
 // Auth context
@@ -18,6 +24,7 @@ const INITIAL_STATE = {
 const reducer = (state, action) => {
     const { type, payload } = action;
     switch(type) {
+        // Login
         case LOGIN_SUCCESS:
             // Add user to local storage
             localStorage.setItem("userAuth", JSON.stringify(payload));
@@ -34,6 +41,8 @@ const reducer = (state, action) => {
                 error: payload,
                 userAuth: null
             };
+        
+        // Profile
         case FETCH_PROFILE_SUCCESS:
             return {
                 ...state,
@@ -47,6 +56,24 @@ const reducer = (state, action) => {
                 loading: false,
                 error: payload,
                 profile: null
+            };
+        case FETCH_PROFILE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+                profile: null
+            };
+
+        // Logout
+        case LOGOUT:
+            // Remove user from local storage
+            localStorage.removeItem("userAuth");
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                userAuth: null
             };
         default:
             return state;
@@ -77,6 +104,8 @@ const AuthContextProvider = ({children}) => {
                     payload: res.data,
                 });
             }
+        // Redirect
+        window.location.href = '/profile';
         } catch (error) {
             dispatch ({
                 type: LOGIN_FAILED,
@@ -107,7 +136,17 @@ const AuthContextProvider = ({children}) => {
                 payload: error?.response?.data?.message
             });
         }
-    }
+    };
+
+    // Log out action
+    const logoutUserAction = () => {
+        dispatch({
+            type: LOGOUT,
+            payload: null
+        });
+        // Redirect
+        window.location.href = '/login';
+    };
 
     return (
         <authContext.Provider 
@@ -116,7 +155,8 @@ const AuthContextProvider = ({children}) => {
                 userAuth: state,
                 fetchProfileAction,
                 profile: state?.profile,
-                error: state?.error
+                error: state?.error,
+                logoutUserAction
             }}
         >
             {children}
