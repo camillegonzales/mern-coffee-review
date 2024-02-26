@@ -1,8 +1,9 @@
 import { useContext } from "react";
-
-useContext
+import { authContext } from "../context/AuthContext/AuthContext";
 
 const Login = () => {
+  const state = useContext(authContext)
+  console.log(state)
   return (
     <div>
         <h1>Login</h1>

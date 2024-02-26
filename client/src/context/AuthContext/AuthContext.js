@@ -24,6 +24,7 @@ const AuthContextProvider = ({children}) => {
         <authContext.Provider 
             value={{
                 isLogin: false,
+                add: () => {}
             }}
         >
             {children}
