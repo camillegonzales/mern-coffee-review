@@ -73,7 +73,6 @@ const deleteShopCtrl = async (req,res) => {
     }
 };
 
-
 module.exports = {
     createShopCtrl,
     getShopsCtrl,
