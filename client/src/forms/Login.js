@@ -2,8 +2,7 @@ import { useContext } from "react";
 import { authContext } from "../context/AuthContext/AuthContext";
 
 const Login = () => {
-  const state = useContext(authContext)
-  console.log(state)
+  const { loginUserAction } = useContext(authContext)
   return (
     <div>
         <h1>Login</h1>

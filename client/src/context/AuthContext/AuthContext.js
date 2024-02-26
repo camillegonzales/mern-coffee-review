@@ -1,4 +1,5 @@
-const { createContext, useReducer } = require("react");
+import { createContext, useReducer } from "react";
+import axios from "axios";
 
 // Auth context
 export const authContext = createContext();
@@ -20,11 +21,29 @@ const reducer = (state, action) => {
 const AuthContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
+    // Login action
+    const loginUserAction = async(formData) => {
+        const config = {
+            headers: {
+                "Content-Type:": "application/json"
+            }
+        };
+        try {
+            const res = axios.post(
+                'http://localhost:9000/users/login', 
+                formData, 
+                config
+            );
+            console.log(res);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <authContext.Provider 
             value={{
-                isLogin: false,
-                add: () => {}
+                loginUserAction
             }}
         >
             {children}
