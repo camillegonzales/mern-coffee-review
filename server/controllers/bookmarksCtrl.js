@@ -4,7 +4,16 @@ const User = require("../models/User");
 // Get all bookmarks for user
 const getBookmarksCtrl = async (req,res) => {
     try {
-        res.json({msg: "Get all bookmarks for user route"});
+        // Find the logged in user
+        const userFound = await User.findById(req.user).populate('bookmarks');
+        if (!userFound) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.json({
+            staus: "success",
+            data: userFound.bookmarks
+        });
     } catch (error) {
         res.json(error);
     }
@@ -17,6 +26,7 @@ const addBookmarkCtrl = async (req,res) => {
             user,
             coffeeShop
         } = req.body
+        
         // Find the logged in user
         const userFound = await User.findById(req.user);
         if (!userFound) {
