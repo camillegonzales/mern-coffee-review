@@ -1,5 +1,6 @@
 import { createContext, useReducer } from "react";
 import axios from "axios";
+import { LOGIN_SUCCESS, LOGIN_FAILED } from "./authActionTypes";
 
 // Auth context
 export const authContext = createContext();
@@ -14,10 +15,24 @@ const INITIAL_STATE = {
 
 // Auth reducer
 const reducer = (state, action) => {
-    console.log(action);
-    switch(action.type) {
-        case "LOGIN_SUCCESS":
-            return {};
+    const { type, payload } = action;
+    switch(type) {
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                userAuth: payload
+            };
+        case LOGIN_FAILED:
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+                userAuth: null
+            };
+        default:
+            return state;
     }
 };
 
