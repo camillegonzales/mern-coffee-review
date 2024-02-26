@@ -1,11 +1,18 @@
-import React from 'react'
+import { useContext, useEffect } from "react";
+import { authContext } from "../context/AuthContext/AuthContext";
 
 const UserProfile = () => {
+  const { fetchProfileAction, profile, error } = useContext(authContext);
+  // Dispatch action
+  useEffect(() => {
+    fetchProfileAction()
+  }, [])
+  console.log(error);
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <>
+      <h1>WELCOME</h1>
+    </>
+  );
+};
 
 export default UserProfile;

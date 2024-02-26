@@ -87,21 +87,20 @@ const AuthContextProvider = ({children}) => {
 
     // Profile action
     const fetchProfileAction = async () => {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${state?.userAuth?.token}`
-            },
-        };
-        const res = await axios.get(`${URL_USER}/profile`, config);
-        if (res?.data?.status === 'success') {
-            dispatch({
-                type: FETCH_PROFILE_SUCCESS,
-                payload: res.data
-            });
-        }
         try {
-            
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${state?.userAuth?.token}`
+                },
+            };
+            const res = await axios.get(`${URL_USER}/profile`, config);
+            if (res?.data) {
+                dispatch({
+                    type: FETCH_PROFILE_SUCCESS,
+                    payload: res.data
+                });
+            }
         } catch (error) {
             dispatch({
                 type: FETCH_PROFILE_FAIL,
@@ -116,7 +115,8 @@ const AuthContextProvider = ({children}) => {
                 loginUserAction,
                 userAuth: state,
                 fetchProfileAction,
-                profile: state?.profile
+                profile: state?.profile,
+                error: state?.error
             }}
         >
             {children}
