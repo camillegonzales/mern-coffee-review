@@ -26,7 +26,6 @@ function App() {
         <Route path="/user/:id" element={<UserProfile />} />
         <Route path="/add-review" element={<AddReview />} />
         <Route path="/edit-review/:id" element={<EditReview />} />
-
       </Routes>
     </BrowserRouter>
   );
