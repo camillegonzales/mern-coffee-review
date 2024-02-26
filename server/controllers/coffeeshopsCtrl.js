@@ -53,7 +53,14 @@ const getShopsCtrl = async (req,res) => {
 // Get single coffee shop
 const getShopCtrl = async (req,res) => {
     try {
-        res.json({msg: "Get a specific coffee shop route"});
+        const coffeeShop = await CoffeeShop.findById(req.params.id);
+        if (!coffeeShop) {
+            return res.status(404).json({ error: "Coffee shop not found" });
+        }
+        res.json({
+            status: "success",
+            data: coffeeShop
+        });
     } catch (error) {
         res.json(error);
     }
