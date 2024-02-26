@@ -29,7 +29,7 @@ const AuthContextProvider = ({children}) => {
             }
         };
         try {
-            const res = axios.post(
+            const res = await axios.post(
                 'http://localhost:9000/users/login', 
                 formData, 
                 config
