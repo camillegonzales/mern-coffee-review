@@ -16,7 +16,7 @@ const createReviewCtrl = async (req,res) => {
             comment
         } = req.body;
 
-        // 1. Find the logged in user
+        // Find the logged in user
         const userFound = await User.findById(req.user);
         if (!userFound) {
             return res.json({
@@ -24,7 +24,7 @@ const createReviewCtrl = async (req,res) => {
             });
         }
 
-        // 2. Find the coffee shop
+        // Find the coffee shop
         const coffeeShopFound = await CoffeeShop.findById(coffeeShop);
         if (!coffeeShopFound) {
             return res.json({
@@ -32,7 +32,7 @@ const createReviewCtrl = async (req,res) => {
             });
         }
 
-        // 3. Create the review
+        // Create the review
         const review = await Review.create({
             user: userFound._id,
             coffeeShop: coffeeShopFound._id,
@@ -44,11 +44,11 @@ const createReviewCtrl = async (req,res) => {
             comment
         });
 
-        // 4. Push the review in to the user's reviews field
+        // Push the review in to the user's reviews field
         userFound.reviews.push(review._id);
         await userFound.save()
 
-        // 5. Push the review in to the coffeeshop's reviews field
+        // Push the review in to the coffeeshop's reviews field
         coffeeShopFound.reviews.push(review._id);
         await coffeeShopFound.save();
 
