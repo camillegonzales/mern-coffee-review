@@ -69,7 +69,43 @@ const getShopCtrl = async (req,res) => {
 // Update coffee shop
 const updateShopCtrl = async (req,res) => {
     try {
-        res.json({msg: "Update a specific coffee shop route"});
+        const id = req.params.id;
+        const {
+            name,
+            neighborhood,
+            address,
+            image,
+            coffeeRating,
+            foodRating,
+            seatingRating,
+            chargingRating,
+            noiseRating,
+            reviews
+        } = req.body;
+
+        // Find the coffee shop by ID and update it
+        const updatedShop = await CoffeeShop.findByIdAndUpdate(id, {
+            name,
+            neighborhood,
+            address,
+            image,
+            coffeeRating,
+            foodRating,
+            seatingRating,
+            chargingRating,
+            noiseRating,
+            reviews
+        }, { new: true });
+
+        if (!updatedShop) {
+            return res.json({ 
+                error: "Coffee shop not found" 
+            });
+        }
+        res.json({
+            status: "success",
+            data: updatedShop
+        });
     } catch (error) {
         res.json(error);
     }
