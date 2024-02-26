@@ -1,10 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
-import Login from "./pages/Login";
-import HomePage from "./pages/HomePage";
-import Register from "./pages/Register";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import Register from './forms/Register';
+import Login from './forms/Login';
+import Search from './pages/Search';
+import ShopProfile from './pages/ShopProfile';
+import UserProfile from './pages/UserProfile';
+import AddReview from './forms/AddReview';
+import EditReview from './forms/EditReview';
 
 
 function App() {
