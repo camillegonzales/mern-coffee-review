@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { authContext } from "../context/AuthContext/AuthContext";
 
 const Login = () => {
-  const { loginUserAction } = useContext(authContext);
+  const { loginUserAction, userAuth } = useContext(authContext);
 
   // Form data
   const [formData, setFormData] = useState({
@@ -22,7 +22,8 @@ const Login = () => {
 
     // Dispatch action
     loginUserAction(formData);
-  }
+  };
+  console.log(userAuth);
 
   return (
     <div>

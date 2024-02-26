@@ -7,7 +7,7 @@ export const authContext = createContext();
 
 // Initial state
 const INITIAL_STATE = {
-    userAuth: null,
+    userAuth: JSON.parse(localStorage.getItem("userAuth")),
     error: null,
     loading: false,
     profile: null
@@ -18,6 +18,8 @@ const reducer = (state, action) => {
     const { type, payload } = action;
     switch(type) {
         case LOGIN_SUCCESS:
+            // Add user to local storage
+            localStorage.setItem("userAuth", JSON.stringify(payload));
             return {
                 ...state,
                 loading: false,
@@ -55,14 +57,14 @@ const AuthContextProvider = ({children}) => {
             );
             if (res?.data?.status === 'success') {
                 dispatch ({
-                    type: 'LOGIN_SUCCESS',
+                    type: LOGIN_SUCCESS,
                     payload: res.data,
                 });
             }
         } catch (error) {
             dispatch ({
-                type: 'LOGIN_FAILED',
-                payload: error.data,
+                type: LOGIN_FAILED,
+                payload: error?.response?.data?.message,
             });
         }
     }
@@ -70,7 +72,9 @@ const AuthContextProvider = ({children}) => {
     return (
         <authContext.Provider 
             value={{
-                loginUserAction
+                loginUserAction,
+                userAuth: state,
+                token: state?.userAuth?.token,
             }}
         >
             {children}
