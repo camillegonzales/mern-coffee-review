@@ -14,8 +14,12 @@ const INITIAL_STATE = {
 
 // Auth reducer
 const reducer = (state, action) => {
-    return {};
-}
+    console.log(action);
+    switch(action.type) {
+        case "LOGIN_SUCCESS":
+            return {};
+    }
+};
 
 // Provider
 const AuthContextProvider = ({children}) => {
@@ -34,9 +38,17 @@ const AuthContextProvider = ({children}) => {
                 formData, 
                 config
             );
-            console.log(res);
+            if (res?.data?.status === 'success') {
+                dispatch ({
+                    type: 'LOGIN_SUCCESS',
+                    payload: res.data,
+                });
+            }
         } catch (error) {
-            console.log(error)
+            dispatch ({
+                type: 'LOGIN_FAILED',
+                payload: error.data,
+            });
         }
     }
 
