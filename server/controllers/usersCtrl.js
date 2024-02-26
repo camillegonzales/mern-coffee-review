@@ -92,7 +92,7 @@ const userProfileCtrl = async (req,res) => {
 const deleteUserCtrl = async (req,res) => {
     try {
         await User.findByIdAndDelete(req.user);
-        res.status(200).json({
+        res.json({
             status: "success",
             data: null
         });
@@ -140,7 +140,7 @@ const updateUserCtrl = async (req,res) => {
             new: true,
             runValidators: true,
         });
-        res.status(200).json({
+        res.json({
             status: "success",
             data: user,
         });
