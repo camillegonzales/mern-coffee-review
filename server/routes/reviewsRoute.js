@@ -15,9 +15,9 @@ reviewsRoute.post("/", isLogin, createReviewCtrl);
 reviewsRoute.get("/:id", getReviewCtrl);
 
 // PUT/reviews/:id
-reviewsRoute.put("/:id", updateReviewCtrl);
+reviewsRoute.put("/:id", isLogin, updateReviewCtrl);
 
 // DELETE/reviews/:id
-reviewsRoute.delete("/:id", deleteReviewCtrl);
+reviewsRoute.delete("/:id", isLogin, deleteReviewCtrl);
 
 module.exports = reviewsRoute; 
