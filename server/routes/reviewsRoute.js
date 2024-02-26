@@ -12,7 +12,7 @@ const reviewsRoute = express.Router();
 reviewsRoute.post("/", isLogin, createReviewCtrl);
 
 // GET/reviews/:id
-reviewsRoute.get("/:id", getReviewCtrl);
+reviewsRoute.get("/:id", isLogin, getReviewCtrl);
 
 // PUT/reviews/:id
 reviewsRoute.put("/:id", isLogin, updateReviewCtrl);
