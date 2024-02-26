@@ -103,9 +103,9 @@ const AuthContextProvider = ({children}) => {
                     type: LOGIN_SUCCESS,
                     payload: res.data,
                 });
+                // Redirect
+                window.location.href = '/profile';
             }
-        // Redirect
-        window.location.href = '/profile';
         } catch (error) {
             dispatch ({
                 type: LOGIN_FAILED,
@@ -153,6 +153,7 @@ const AuthContextProvider = ({children}) => {
             value={{
                 loginUserAction,
                 userAuth: state,
+                token: state?.userAuth?.token,
                 fetchProfileAction,
                 profile: state?.profile,
                 error: state?.error,
