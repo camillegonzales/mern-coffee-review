@@ -4,8 +4,7 @@ const {
     getShopsCtrl,
     getShopCtrl,
     updateShopCtrl,
-    deleteShopCtrl,
-    addShopReviewCtrl
+    deleteShopCtrl
 } = require("../controllers/coffeeshopsCtrl")
 const coffeeshopsRoute = express.Router();
 
@@ -23,9 +22,5 @@ coffeeshopsRoute.put("/:id", updateShopCtrl);
 
 // DELETE/coffeeshops/:id
 coffeeshopsRoute.delete("/:id", deleteShopCtrl);
-
-// POST/coffeeshops/:id/reviews
-coffeeshopsRoute.post("/:id/reviews", addShopReviewCtrl);
-
 
 module.exports = coffeeshopsRoute;

@@ -73,20 +73,11 @@ const deleteShopCtrl = async (req,res) => {
     }
 };
 
-// Add review to coffee shop
-const addShopReviewCtrl = async (req,res) => {
-    try {
-        res.json({msg: "Add a review to a specific coffee shop route"});
-    } catch (error) {
-        res.json(error);
-    }
-};
 
 module.exports = {
     createShopCtrl,
     getShopsCtrl,
     getShopCtrl,
     updateShopCtrl,
-    deleteShopCtrl,
-    addShopReviewCtrl
+    deleteShopCtrl
 };
