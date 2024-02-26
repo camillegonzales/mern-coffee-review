@@ -79,7 +79,9 @@ const userLoginCtrl = async (req,res) => {
 const userProfileCtrl = async (req,res) => {
     console.log(req.user);
     try {
-        const user = await User.findById(req.user);
+        const user = await User.findById(req.user).populate(
+            "bookmarks reviews"
+        );
         res.json(user);
     } catch (error) {
         res.json(error);
