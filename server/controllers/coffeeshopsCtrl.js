@@ -114,7 +114,36 @@ const updateShopCtrl = async (req,res) => {
 // Delete coffee shop
 const deleteShopCtrl = async (req,res) => {
     try {
-        res.json({msg: "Delete a specific coffee shop route"});
+        const id = req.params.id;
+
+        // Remove the coffee shop from users' bookmarks array
+        await User.updateMany(
+            { bookmarks: id },
+            { $pull: { bookmarks: id } }
+        );
+
+        // Find all reviews associated with the coffee shop
+        const reviews = await Review.find({ coffeeShop: id });
+
+        // Extract review IDs
+        const reviewIds = reviews.map(review => review._id);
+
+        // Remove references to the coffee shop from users' reviews arrays
+        await User.updateMany(
+            { reviews: { $in: reviewIds } },
+            { $pull: { reviews: { $in: reviewIds } } }
+        );
+
+        // Delete reviews associated with the coffee shop
+        await Review.deleteMany({ coffeeShop: id });
+
+        // Delete the coffee shop
+        await CoffeeShop.findByIdAndDelete(id);
+
+        res.json({ 
+            status: "success", 
+            data: null 
+        });
     } catch (error) {
         res.json(error);
     }
