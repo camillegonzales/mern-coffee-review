@@ -7,7 +7,7 @@ import Register from './forms/Register';
 import Login from './forms/Login';
 import Search from './pages/Search';
 import ShopProfile from './pages/ShopProfile';
-import UserProfile from './pages/UserProfile';
+import UserProfile from './pages/Profile/UserProfile';
 import AddReview from './forms/AddReview';
 import EditReview from './forms/EditReview';
 
