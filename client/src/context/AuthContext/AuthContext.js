@@ -1,6 +1,7 @@
 import { createContext, useReducer } from "react";
 import axios from "axios";
-import { LOGIN_SUCCESS, LOGIN_FAILED } from "./authActionTypes";
+import { LOGIN_SUCCESS, LOGIN_FAILED, FETCH_PROFILE_SUCCESS, FETCH_PROFILE_FAIL } from "./authActionTypes";
+import { URL_USER } from "../../utils/URL";
 
 // Auth context
 export const authContext = createContext();
@@ -33,6 +34,20 @@ const reducer = (state, action) => {
                 error: payload,
                 userAuth: null
             };
+        case FETCH_PROFILE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                profile: payload
+            };
+        case FETCH_PROFILE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+                profile: null
+            };
         default:
             return state;
     }
@@ -41,17 +56,18 @@ const reducer = (state, action) => {
 // Provider
 const AuthContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+    console.log(state?.profile)
 
     // Login action
     const loginUserAction = async(formData) => {
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
         };
         try {
             const res = await axios.post(
-                'http://localhost:9000/users/login', 
+                `${URL_USER}/login`,
                 formData, 
                 config
             );
@@ -67,6 +83,31 @@ const AuthContextProvider = ({children}) => {
                 payload: error?.response?.data?.message,
             });
         }
+    };
+
+    // Profile action
+    const fetchProfileAction = async () => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${state?.userAuth?.token}`
+            },
+        };
+        const res = await axios.get(`${URL_USER}/profile`, config);
+        if (res?.data?.status === 'success') {
+            dispatch({
+                type: FETCH_PROFILE_SUCCESS,
+                payload: res.data
+            });
+        }
+        try {
+            
+        } catch (error) {
+            dispatch({
+                type: FETCH_PROFILE_FAIL,
+                payload: error?.response?.data?.message
+            });
+        }
     }
 
     return (
@@ -74,7 +115,8 @@ const AuthContextProvider = ({children}) => {
             value={{
                 loginUserAction,
                 userAuth: state,
-                token: state?.userAuth?.token,
+                fetchProfileAction,
+                profile: state?.profile
             }}
         >
             {children}
