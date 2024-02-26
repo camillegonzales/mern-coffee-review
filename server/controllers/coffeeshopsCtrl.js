@@ -40,7 +40,11 @@ const createShopCtrl = async (req,res) => {
 // Get all coffee shops
 const getShopsCtrl = async (req,res) => {
     try {
-        res.json({msg: "Get all coffee shops route"});
+        const coffeeShops = await CoffeeShop.find();
+        res.json({
+            status: "success",
+            data: coffeeShops
+        });
     } catch (error) {
         res.json(error);
     }
