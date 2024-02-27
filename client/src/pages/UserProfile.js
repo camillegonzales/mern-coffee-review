@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../context/AuthContext/AuthContext";
-import axios from "axios";
 import UserBookmarks from "../components/Profile/UserBookmarks";
 import UserReviews from "../components/Profile/UserReviews";
 import { formatDate } from "../utils/formatDate";

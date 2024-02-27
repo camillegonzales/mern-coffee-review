@@ -153,6 +153,7 @@ const AuthContextProvider = ({ children }) => {
                     type: REGISTER_SUCCESS,
                     payload: res.data,
                 });
+                toast.success('Sign-up successful. Welcome!');
                 // Redirect
                 window.location.href = '/login';
             } else {
