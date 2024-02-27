@@ -76,13 +76,6 @@ const reducer = (state, action) => {
                 error: payload,
                 profile: null
             };
-        case FETCH_PROFILE_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: payload,
-                profile: null
-            };
 
         // Logout
         case LOGOUT:
@@ -154,8 +147,10 @@ const AuthContextProvider = ({ children }) => {
                     payload: res.data,
                 });
                 toast.success('Sign-up successful. Welcome!');
-                // Redirect
-                window.location.href = '/login';
+                // Delay redirect by 2 seconds to show notification
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 2000);
             } else {
                 toast.error(res.data.error)
             }
