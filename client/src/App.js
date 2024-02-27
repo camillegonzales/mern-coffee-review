@@ -3,13 +3,13 @@ import './App.css';
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import Register from './forms/Register';
-import Login from './forms/Login';
+import Register from './pages/Register';
+import Login from './pages/Login';
 import Search from './pages/Search';
 import ShopProfile from './pages/ShopProfile';
-import UserProfile from './pages/Profile/UserProfile';
-import AddReview from './forms/AddReview';
-import EditReview from './forms/EditReview';
+import UserProfile from './pages/UserProfile';
+import AddReview from './components/Reviews/AddReview';
+import EditReview from './components/Reviews/EditReview';
 import { Toaster } from "react-hot-toast";
 
 

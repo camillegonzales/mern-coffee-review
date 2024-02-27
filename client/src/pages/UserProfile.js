@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { authContext } from "../../context/AuthContext/AuthContext";
+import { authContext } from "../context/AuthContext/AuthContext";
 import axios from "axios";
-import UserBookmarks from "./UserBookmarks";
-import UserReviews from "./UserReviews";
-import { formatDate } from "../../utils/formatDate";
+import UserBookmarks from "../components/Profile/UserBookmarks";
+import UserReviews from "../components/Profile/UserReviews";
+import { formatDate } from "../utils/formatDate";
 
 const UserProfile = () => {
   const { fetchProfileAction, profile, error } = useContext(authContext);
