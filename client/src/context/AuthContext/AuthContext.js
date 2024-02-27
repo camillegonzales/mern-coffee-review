@@ -10,6 +10,7 @@ import {
     REGISTER_FAIL
 } from "./authActionTypes";
 import { URL_USER } from "../../utils/URL";
+import toast from "react-hot-toast";
 
 // Auth context
 export const authContext = createContext();
@@ -123,6 +124,8 @@ const AuthContextProvider = ({ children }) => {
                 });
                 // Redirect
                 window.location.href = '/profile';
+            } else {
+                toast.error(res.data.error)
             }
         } catch (error) {
             dispatch ({
@@ -152,6 +155,8 @@ const AuthContextProvider = ({ children }) => {
                 });
                 // Redirect
                 window.location.href = '/login';
+            } else {
+                toast.error(res.data.error)
             }
         } catch (error) {
             dispatch ({

@@ -49,6 +49,12 @@ const registerUserCrtl = async (req,res) => {
 const userLoginCtrl = async (req,res) => {
     const {email, password} = req.body;
     try {
+        if (!email || !password) {
+            return res.json({
+                error: "Please fill out both fields"
+            });
+        }
+
         // Check if email exists
         const userFound = await User.findOne({email});
         if (!userFound) {

@@ -20,9 +20,6 @@ const Register = () => {
   // Submit
   const onSubmitHandler = e => {
     e.preventDefault();
-    if (!userName || !email || !password) {
-      return alert("Please fill out all fields");
-    }
     
     // Dispatch action
     registerUserAction(formData);

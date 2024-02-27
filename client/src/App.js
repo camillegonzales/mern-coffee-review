@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
@@ -10,13 +10,15 @@ import ShopProfile from './pages/ShopProfile';
 import UserProfile from './pages/Profile/UserProfile';
 import AddReview from './forms/AddReview';
 import EditReview from './forms/EditReview';
+import { Toaster } from "react-hot-toast";
 
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <Navbar />
+      <Toaster position='bottom-right' toastOptions={{duration: 4000}} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
@@ -27,7 +29,7 @@ function App() {
         <Route path="/add-review" element={<AddReview />} />
         <Route path="/edit-review/:id" element={<EditReview />} />
       </Routes>
-    </BrowserRouter>
+      </>
   );
 };
 
