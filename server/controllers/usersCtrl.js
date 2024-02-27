@@ -37,7 +37,7 @@ const registerUserCrtl = async (req,res) => {
             password: hashedPassword,
         });
         res.json({
-            status: "Success",
+            status: "success",
             user,
         });
     } catch (error) {

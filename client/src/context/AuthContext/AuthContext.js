@@ -5,7 +5,9 @@ import {
     LOGIN_FAILED, 
     FETCH_PROFILE_SUCCESS, 
     FETCH_PROFILE_FAIL, 
-    LOGOUT 
+    LOGOUT,
+    REGISTER_SUCCESS,
+    REGISTER_FAIL
 } from "./authActionTypes";
 import { URL_USER } from "../../utils/URL";
 
@@ -24,6 +26,22 @@ const INITIAL_STATE = {
 const reducer = (state, action) => {
     const { type, payload } = action;
     switch(type) {
+        // Register
+        case REGISTER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: null,
+                userAuth: payload
+            };
+        case REGISTER_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+                userAuth: null
+            };
+
         // Login
         case LOGIN_SUCCESS:
             // Add user to local storage
@@ -81,12 +99,12 @@ const reducer = (state, action) => {
 };
 
 // Provider
-const AuthContextProvider = ({children}) => {
+const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
     console.log(state?.profile)
 
     // Login action
-    const loginUserAction = async(formData) => {
+    const loginUserAction = async (formData) => {
         const config = {
             headers: {
                 "Content-Type": "application/json"
@@ -109,6 +127,35 @@ const AuthContextProvider = ({children}) => {
         } catch (error) {
             dispatch ({
                 type: LOGIN_FAILED,
+                payload: error?.response?.data?.message,
+            });
+        }
+    };
+
+    // Register action
+    const registerUserAction = async (formData) => {
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            },
+        };
+        try {
+            const res = await axios.post(
+                `${URL_USER}/register`,
+                formData, 
+                config
+            );
+            if (res?.data?.status === 'success') {
+                dispatch ({
+                    type: REGISTER_SUCCESS,
+                    payload: res.data,
+                });
+                // Redirect
+                window.location.href = '/login';
+            }
+        } catch (error) {
+            dispatch ({
+                type: REGISTER_FAIL,
                 payload: error?.response?.data?.message,
             });
         }
@@ -157,7 +204,8 @@ const AuthContextProvider = ({children}) => {
                 fetchProfileAction,
                 profile: state?.profile,
                 error: state?.error,
-                logoutUserAction
+                logoutUserAction,
+                registerUserAction
             }}
         >
             {children}

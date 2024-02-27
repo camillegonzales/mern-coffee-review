@@ -1,28 +1,32 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from 'react-router-dom';
+import { authContext } from "../context/AuthContext/AuthContext";
 
 const Register = () => {
+  const {registerUserAction, error} = useContext(authContext);
   // Form data
   const [formData, setFormData] = useState({
     userName: '',
     email: '',
     password: ''
   });
-  const {userName, email, password} = formData
+  const { userName, email, password } = formData;
 
   // onChange
   const onChangeInput = e => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   // Submit
   const onSubmitHandler = e => {
+    e.preventDefault();
     if (!userName || !email || !password) {
       return alert("Please fill out all fields");
     }
-    e.preventDefault();
-    console.log(formData);
-  }
+    
+    // Dispatch action
+    registerUserAction(formData);
+  };
 
   return (
     <div>
@@ -56,8 +60,8 @@ const Register = () => {
               />
 
               <button type='submit'>Sign up</button>
-              <p>Already have an account? <Link to='/login'>Sign in</Link></p>
         </form>
+        <p>Already have an account? <Link to='/login'>Sign in</Link></p>
     </div>
   );
 };
