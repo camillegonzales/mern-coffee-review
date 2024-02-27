@@ -37,7 +37,7 @@ aside {}
 footer {}
 
 /* ----- Anchors ----- Text links */
-a {}
+a {text-decoration: underline;}
 a:link {}
 a:hover {}
 a:active {}
@@ -45,7 +45,7 @@ a:visited {}
 
 /*  ----- Navigation ----- Override text links for navigation only.  */
 nav {}
-nav a {padding: 2%; text-decoration: underline;}
+nav a {padding: 2%;}
 nav a:hover {}
 
 /*  -----  Typography  ----- */

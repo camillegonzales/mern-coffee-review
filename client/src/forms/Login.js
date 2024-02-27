@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { authContext } from "../context/AuthContext/AuthContext";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const { loginUserAction, userAuth } = useContext(authContext);
@@ -27,7 +28,7 @@ const Login = () => {
 
   return (
     <div>
-        <h1>Login</h1>
+        <h1>Sign into your account</h1>
         <form onSubmit={onSubmitHandler}>
           <label>Email</label>
           <input 
@@ -49,6 +50,7 @@ const Login = () => {
 
           <button type='submit'>Login</button>
         </form>
+        <p>Don't have an account? <Link to='/register'>Register for one here</Link></p>
     </div>
   );
 };
