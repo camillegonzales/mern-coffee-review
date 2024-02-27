@@ -149,10 +149,54 @@ const deleteShopCtrl = async (req,res) => {
     }
 };
 
+// Get distinct neighborhoods for dropdown
+const getNeighborhoodsCtrl = async (req, res) => {
+    try {
+        const neighborhoods = await CoffeeShop.distinct("neighborhood.name");
+        res.json({
+            staus: "success",
+            data: neighborhoods
+        });
+    } catch (error) {
+        res.json(error);
+    }
+};
+
+// Get coffeeshops of specific neighborhood
+const getShopsByNeighborhoodCtrl = async (req, res) => {
+    const { neighborhood } = req.params;
+    try {
+        const coffeeShops = await CoffeeShop.find({ neighborhood });
+        res.json({
+            status: "success",
+            data: coffeeShops
+        });
+    } catch (error) {
+        res.json(error);
+    }
+};
+
+// Order coffeeshops based on chosen rating category
+const getShopsByRatingCtrl = async (req, res) => {
+    const { ratingType } = req.params;
+    try {
+        const coffeeShops = await CoffeeShop.find().sort({ [ratingType]: -1 });
+        res.json({
+            status: "success",
+            data: coffeeShops
+        });
+    } catch (error) {
+        res.json(error);
+    }
+};
+
 module.exports = {
     createShopCtrl,
     getShopsCtrl,
     getShopCtrl,
     updateShopCtrl,
-    deleteShopCtrl
+    deleteShopCtrl,
+    getNeighborhoodsCtrl,
+    getShopsByNeighborhoodCtrl,
+    getShopsByRatingCtrl
 };

@@ -4,7 +4,10 @@ const {
     getShopsCtrl,
     getShopCtrl,
     updateShopCtrl,
-    deleteShopCtrl
+    deleteShopCtrl,
+    getNeighborhoodsCtrl,
+    getShopsByNeighborhoodCtrl,
+    getShopsByRatingCtrl
 } = require("../controllers/coffeeshopsCtrl")
 const coffeeshopsRoute = express.Router();
 
@@ -22,5 +25,14 @@ coffeeshopsRoute.put("/:id", updateShopCtrl);
 
 // DELETE/coffeeshops/:id
 coffeeshopsRoute.delete("/:id", deleteShopCtrl);
+
+// GET/coffeeshops/neighborhood
+coffeeshopsRoute.get("/neighborhoods", getNeighborhoodsCtrl); 
+
+// GET/coffeeshops/neighborhood/:neighborhood
+coffeeshopsRoute.get("/neighborhood/:neighborhood", getShopsByNeighborhoodCtrl);
+
+// GET/coffeeshops/rating/:ratingType
+coffeeshopsRoute.get("/rating/:ratingType", getShopsByRatingCtrl);
 
 module.exports = coffeeshopsRoute;
