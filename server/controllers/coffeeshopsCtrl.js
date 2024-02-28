@@ -67,9 +67,9 @@ const getShopsCtrl = async (req,res) => {
         sortOption[ratingType] = -1;
 
         const coffeeShops = await CoffeeShop.find(query)
-        .populate('neighborhood')
-        .sort(sortOption);
-        
+            .populate('neighborhood')
+            .sort(sortOption);
+
         res.json({
             status: "success",
             data: coffeeShops
