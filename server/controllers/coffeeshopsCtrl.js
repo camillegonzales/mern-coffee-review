@@ -49,7 +49,20 @@ const createShopCtrl = async (req,res) => {
 // Get all coffee shops
 const getShopsCtrl = async (req,res) => {
     try {
-        const coffeeShops = await CoffeeShop.find().populate('neighborhood');
+        let query = {};
+        const { neighborhood, ratingType } = req.query;
+
+        // Filter by neighborhood if provided
+        if (neighborhood) {
+            query.neighborhood = neighborhood;
+        }
+
+        // Filter by rating type if provided
+        if (ratingType) {
+            query[ratingType] = { $exists: true };
+        }
+
+        const coffeeShops = await CoffeeShop.find(query).populate('neighborhood');
         res.json({
             status: "success",
             data: coffeeShops
