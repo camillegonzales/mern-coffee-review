@@ -49,7 +49,7 @@ const createShopCtrl = async (req,res) => {
 // Get all coffee shops
 const getShopsCtrl = async (req,res) => {
     try {
-        const coffeeShops = await CoffeeShop.find();
+        const coffeeShops = await CoffeeShop.find().populate('neighborhood');
         res.json({
             status: "success",
             data: coffeeShops

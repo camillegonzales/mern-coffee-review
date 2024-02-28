@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { URL_SHOPS } from '../utils/URL';
+import axios from 'axios'
+import { URL_NEIGHBORHOODS, URL_SHOPS } from '../utils/URL';
 
 const SearchPage = () => {
   const [neighborhoods, setNeighborhoods] = useState([]);
   const [selectedNeighborhood, setSelectedNeighborhood] = useState('');
-  const [selectedRatingCategory, setSelectedRatingCategory] = useState('');
+  const [selectedRatingType, setSelectedRatingType] = useState('');
   const [coffeeShops, setCoffeeShops] = useState([]);
 
-  // Fetch neighborhoods and initialize component
+  // Fetch neighborhoods on component mount
   useEffect(() => {
     const fetchNeighborhoods = async () => {
       try {
-        const response = await axios.get(`${URL_SHOPS}/neighborhoods`);
-        setNeighborhoods(response.data);
+        const response = await axios.get(`${URL_NEIGHBORHOODS}`);
+        setNeighborhoods(response.data.data);
       } catch (error) {
         console.error('Error fetching neighborhoods:', error);
       }
@@ -22,39 +22,63 @@ const SearchPage = () => {
     fetchNeighborhoods();
   }, []);
 
-  // Fetch coffee shops based on selected filters
-  const fetchCoffeeShops = async () => {
-    try {
-      const response = await axios.get(`${URL_SHOPS}/neighborhood/neighborhood=${selectedNeighborhood}&ratingType=${selectedRatingCategory}`);
-      setCoffeeShops(response.data);
-    } catch (error) {
-      console.error('Error fetching coffee shops:', error);
-    }
+  // Fetch coffee shops based on selected neighborhood and rating type
+  useEffect(() => {
+    const fetchCoffeeShops = async () => {
+      try {
+        const params = {};
+
+        // Add neighborhood to params if selected
+        if (selectedNeighborhood) {
+          params.neighborhood = selectedNeighborhood;
+        }
+
+        // Add rating type to params if selected
+        if (selectedRatingType) {
+          params.ratingType = selectedRatingType;
+        }
+
+        const response = await axios.get(`${URL_SHOPS}`, { params });
+        setCoffeeShops(response.data.data);
+      } catch (error) {
+        console.error('Error fetching coffee shops:', error);
+      }
+    };
+
+    fetchCoffeeShops();
+  }, [selectedNeighborhood, selectedRatingType]);
+
+  // Handle neighborhood change
+  const handleNeighborhoodChange = (event) => {
+    setSelectedNeighborhood(event.target.value);
+  };
+
+  // Handle rating type change
+  const handleRatingTypeChange = (event) => {
+    setSelectedRatingType(event.target.value);
   };
 
   // Handle search button click
   const handleSearch = () => {
-    fetchCoffeeShops();
+    // The coffee shops will be fetched automatically based on the selected neighborhood and rating type
   };
 
   return (
     <div>
-      <h1>Search Coffee Shops</h1>
+      <h1>Search Page</h1>
       <div>
-        {/* Dropdown for neighborhoods */}
-        <label htmlFor="neighborhood">Neighborhood:</label>
-        <select id="neighborhood" value={selectedNeighborhood} onChange={e => setSelectedNeighborhood(e.target.value)}>
-          <option value="">Select Neighborhood</option>
-          {neighborhoods.map(neighborhood => (
-            <option key={neighborhood} value={neighborhood}>{neighborhood}</option>
+        <label>Neighborhood:</label>
+        <select value={selectedNeighborhood} onChange={handleNeighborhoodChange}>
+          <option value="">All Neighborhoods</option>
+          {neighborhoods.map((neighborhood) => (
+            <option key={neighborhood._id} value={neighborhood.name}>{neighborhood.name}</option>
           ))}
         </select>
       </div>
       <div>
-        {/* Dropdown for rating categories */}
-        <label htmlFor="ratingCategory">Rating Category:</label>
-        <select id="ratingCategory" value={selectedRatingCategory} onChange={e => setSelectedRatingCategory(e.target.value)}>
-          <option value="">Select Rating Category</option>
+        <label>Rating Type:</label>
+        <select value={selectedRatingType} onChange={handleRatingTypeChange}>
+          <option value="">All Ratings</option>
           <option value="coffeeRating">Coffee Rating</option>
           <option value="foodRating">Food Rating</option>
           <option value="seatingRating">Seating Rating</option>
@@ -63,21 +87,28 @@ const SearchPage = () => {
         </select>
       </div>
       <button onClick={handleSearch}>Search</button>
-      {/* Table to display coffee shops */}
       <table>
         <thead>
           <tr>
             <th>Name</th>
             <th>Neighborhood</th>
-            <th>{selectedRatingCategory}</th> {/* Display selected rating category as table header */}
+            <th>Coffee Rating</th>
+            <th>Food Rating</th>
+            <th>Seating Rating</th>
+            <th>Charging Rating</th>
+            <th>Noise Rating</th>
           </tr>
         </thead>
         <tbody>
-          {coffeeShops.map(coffeeShop => (
-            <tr key={coffeeShop._id}>
-              <td>{coffeeShop.name}</td>
-              <td>{coffeeShop.neighborhood}</td>
-              <td>{coffeeShop[selectedRatingCategory]}</td> {/* Display selected rating category value */}
+          {coffeeShops.map((coffeeshop) => (
+            <tr key={coffeeshop._id}>
+              <td>{coffeeshop.name}</td>
+              <td>{coffeeshop.neighborhood.name}</td>
+              <td>{coffeeshop.coffeeRating}</td>
+              <td>{coffeeshop.foodRating}</td>
+              <td>{coffeeshop.seatingRating}</td>
+              <td>{coffeeshop.chargingRating}</td>
+              <td>{coffeeshop.noiseRating}</td>
             </tr>
           ))}
         </tbody>
