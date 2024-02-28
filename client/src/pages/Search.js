@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { URL_NEIGHBORHOODS, URL_SHOPS } from '../utils/URL';
 
 const SearchPage = () => {
@@ -94,7 +95,7 @@ const SearchPage = () => {
         <tbody>
           {coffeeShops.map((coffeeShop) => (
             <tr key={coffeeShop._id}>
-              <td>{coffeeShop.name}</td>
+              <td><Link to={`/shop/${coffeeShop._id}`}>{coffeeShop.name}</Link></td>
               <td>{coffeeShop.neighborhood.name}</td> {/* Assuming neighborhood object has 'name' property */}
               <td>{coffeeShop.coffeeRating}</td>
               <td>{coffeeShop.foodRating}</td>
