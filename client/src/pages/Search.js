@@ -25,7 +25,7 @@ const SearchPage = () => {
   // Fetch coffee shops based on selected filters
   const fetchCoffeeShops = async () => {
     try {
-      const response = await axios.get(`${URL_SHOPS}/neighborhood/neighborhood=${selectedNeighborhood}&ratingCategory=${selectedRatingCategory}`);
+      const response = await axios.get(`${URL_SHOPS}/neighborhood/neighborhood=${selectedNeighborhood}&ratingType=${selectedRatingCategory}`);
       setCoffeeShops(response.data);
     } catch (error) {
       console.error('Error fetching coffee shops:', error);
