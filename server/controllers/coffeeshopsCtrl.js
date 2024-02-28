@@ -149,19 +149,6 @@ const deleteShopCtrl = async (req,res) => {
     }
 };
 
-// Get distinct neighborhoods for dropdown
-const getNeighborhoodsCtrl = async (req, res) => {
-    try {
-        const neighborhoods = await CoffeeShop.distinct("neighborhood.name");
-        res.json({
-            staus: "success",
-            data: neighborhoods
-        });
-    } catch (error) {
-        res.json(error);
-    }
-};
-
 // Get coffeeshops of specific neighborhood
 const getShopsByNeighborhoodCtrl = async (req, res) => {
     const { neighborhood } = req.params;
@@ -196,7 +183,6 @@ module.exports = {
     getShopCtrl,
     updateShopCtrl,
     deleteShopCtrl,
-    getNeighborhoodsCtrl,
     getShopsByNeighborhoodCtrl,
     getShopsByRatingCtrl
 };

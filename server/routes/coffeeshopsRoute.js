@@ -5,7 +5,6 @@ const {
     getShopCtrl,
     updateShopCtrl,
     deleteShopCtrl,
-    getNeighborhoodsCtrl,
     getShopsByNeighborhoodCtrl,
     getShopsByRatingCtrl
 } = require("../controllers/coffeeshopsCtrl")
@@ -25,9 +24,6 @@ coffeeshopsRoute.put("/:id", updateShopCtrl);
 
 // DELETE/coffeeshops/:id
 coffeeshopsRoute.delete("/:id", deleteShopCtrl);
-
-// GET/coffeeshops/neighborhood
-coffeeshopsRoute.get("/neighborhoods", getNeighborhoodsCtrl); 
 
 // GET/coffeeshops/neighborhood/:neighborhood
 coffeeshopsRoute.get("/neighborhood/:neighborhood", getShopsByNeighborhoodCtrl);
