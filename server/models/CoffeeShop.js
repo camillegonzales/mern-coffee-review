@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 // Coffee shop schema
 const coffeeShopSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    neighborhood: { type: String, required: true },
+    neighborhood: { type: mongoose.Schema.Types.ObjectId, ref: 'Neighborhood', required: true },
     address: { type: String, required: true },
     image: { type: String },
     coffeeRating: { type: Number, min: 1, max: 5, default: null },

@@ -1,11 +1,12 @@
 const CoffeeShop = require("../models/CoffeeShop");
+const Neighborhood = require("../models/Neighborhood");
 const Review = require("../models/Review");
 
 // Create coffee shop
 const createShopCtrl = async (req,res) => {
     const {
         name,
-        neighborhood,
+        neighborhood: neighborhoodName,
         address,
         image,
         coffeeRating,
@@ -15,10 +16,18 @@ const createShopCtrl = async (req,res) => {
         noiseRating,
         reviews
     } = req.body;
+
+    // Check if the neighborhood exists
+    let neighborhoodDB = await Neighborhood.findOne({ name: neighborhoodName });
+
+    if (!neighborhoodDB) {
+        // If the neighborhood doesn't exist, create a new one
+        neighborhoodDB = await Neighborhood.create({ name: neighborhoodName });
+    }
     try {
         const coffeeShop = await CoffeeShop.create({
             name,
-            neighborhood,
+            neighborhood: neighborhoodDB._id,
             address,
             image,
             coffeeRating,
