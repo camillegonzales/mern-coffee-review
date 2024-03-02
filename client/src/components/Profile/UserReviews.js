@@ -16,9 +16,15 @@ const UserReviews = ({ reviews }) => {
 
         // Create a map of coffee shop IDs to names
         const coffeeShopsMap = {};
-        coffeeShopsData.forEach(coffeeShop => {
-          coffeeShopsMap[coffeeShop.id] = coffeeShop.name;
-        });
+        // Check if coffeeShopsData is an array before iterating over it
+        if (Array.isArray(coffeeShopsData)) {
+          coffeeShopsData.forEach((coffeeShop) => {
+            coffeeShopsMap[coffeeShop.id] = coffeeShop.name;
+          });
+        } else {
+          // Handle the case when coffeeShopsData is not an array
+          console.log('No coffee shop data available');
+        }
 
         setCoffeeShops(coffeeShopsMap);
       } catch (error) {
