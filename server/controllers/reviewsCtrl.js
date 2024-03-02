@@ -32,6 +32,12 @@ const createReviewCtrl = async (req,res) => {
             });
         }
 
+        if (!coffeeRating || !foodRating || !seatingRating || !chargingRating || !noiseRating) {
+            return res.json({
+                error: "Please choose a rating for all categories"
+            });
+        }
+
         // Create the review
         const review = await Review.create({
             user: userFound._id,
