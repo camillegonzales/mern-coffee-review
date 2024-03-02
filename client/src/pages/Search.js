@@ -97,11 +97,11 @@ const SearchPage = () => {
             <tr key={coffeeShop._id}>
               <td><Link to={`/shop/${coffeeShop._id}`}>{coffeeShop.name}</Link></td>
               <td>{coffeeShop.neighborhood.name}</td> {/* Assuming neighborhood object has 'name' property */}
-              <td>{coffeeShop.coffeeRating}</td>
-              <td>{coffeeShop.foodRating}</td>
-              <td>{coffeeShop.seatingRating}</td>
-              <td>{coffeeShop.chargingRating}</td>
-              <td>{coffeeShop.noiseRating}</td>
+              <td>{coffeeShop.coffeeRating || 'N/A'}</td>
+              <td>{coffeeShop.foodRating || 'N/A'}</td>
+              <td>{coffeeShop.seatingRating || 'N/A'}</td>
+              <td>{coffeeShop.chargingRating || 'N/A'}</td>
+              <td>{coffeeShop.noiseRating || 'N/A'}</td>
             </tr>
           ))}
         </tbody>
