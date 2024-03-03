@@ -12,11 +12,5 @@ export const LOGIN_FAILED = "LOGIN_FAILED";
 export const FETCH_PROFILE_SUCCESS = "FETCH_PROFILE_SUCCESS";
 export const FETCH_PROFILE_FAIL = "FETCH_PROFILE_FAIL";
 
-// Update profile
-export const UPDATE_PROFILE = "UPDATE_PROFILE";
-export const UPDATE_PROFILE_FAIL = "UPDATE_PROFILE_FAIL";
-export const DELETE_PROFILE = "DELETE_PROFILE";
-export const DELETE_PROFILE_FAIL = "DELETE_PROFILE_FAIL";
-
 // Logout
 export const LOGOUT = "LOGOUT";
