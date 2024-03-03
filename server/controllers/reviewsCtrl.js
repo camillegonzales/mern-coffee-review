@@ -5,6 +5,7 @@ const User = require("../models/User");
 // Create review
 const createReviewCtrl = async (req,res) => {
     try {
+        console.log('submitted. trying to create.')
         const {
             user,
             coffeeShop,
@@ -17,7 +18,7 @@ const createReviewCtrl = async (req,res) => {
         } = req.body;
 
         // Find the logged in user
-        const userFound = await User.findById(req.user);
+        const userFound = await User.findById(user);
         if (!userFound) {
             return res.json({
                 error: "Please login to proceed"
@@ -37,7 +38,8 @@ const createReviewCtrl = async (req,res) => {
                 error: "Please choose a rating for all categories"
             });
         }
-
+        
+        console.log('no errors. going to submit')
         // Create the review
         const review = await Review.create({
             user: userFound._id,

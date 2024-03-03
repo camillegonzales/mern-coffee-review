@@ -1,13 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { URL_REVIEWS } from "../../utils/URL";
 import toast from "react-hot-toast";
+import { authContext } from "../../context/AuthContext/AuthContext";
 
 const AddReview = () => {
   const location = useLocation();
   const shop = location.state?.shop;
   const navigate = useNavigate();
+  const { userAuth } = useContext(authContext);
 
   const [coffeeRating, setCoffeeRating] = useState('');
   const [foodRating, setFoodRating] = useState('');
@@ -19,7 +21,9 @@ const AddReview = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(URL_REVIEWS, {
+      console.log('handling submit')
+      const res = await axios.post(`${URL_REVIEWS}`, {
+        user: userAuth?.userFound?._id,
         coffeeShop: shop._id,
         coffeeRating,
         foodRating,
@@ -49,7 +53,7 @@ const AddReview = () => {
       <form onSubmit={handleSubmit}>
 
       <div>
-        <label htmlFor="coffeeRating">Coffee Rating:</label>
+        <label>Coffee Rating:</label>
         {[1, 2, 3, 4, 5].map((value) => (
           <label key={value}>
             <input
@@ -65,7 +69,7 @@ const AddReview = () => {
       </div>
 
       <div>
-        <label htmlFor="foodRating">Food Rating:</label>
+        <label>Food Rating:</label>
         {[1, 2, 3, 4, 5].map((value) => (
           <label key={value}>
             <input
@@ -81,7 +85,7 @@ const AddReview = () => {
       </div>
 
       <div>
-        <label htmlFor="seatingRating">Seating Rating:</label>
+        <label>Seating Rating:</label>
         {[1, 2, 3, 4, 5].map((value) => (
           <label key={value}>
             <input
@@ -97,7 +101,7 @@ const AddReview = () => {
       </div>
 
       <div>
-        <label htmlFor="chargingRating">Charging Rating:</label>
+        <label>Charging Rating:</label>
         {[1, 2, 3, 4, 5].map((value) => (
           <label key={value}>
             <input
@@ -113,7 +117,7 @@ const AddReview = () => {
       </div>
 
       <div>
-        <label htmlFor="noiseRating">Noise Rating:</label>
+        <label>Noise Rating:</label>
         {[1, 2, 3, 4, 5].map((value) => (
           <label key={value}>
             <input
