@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { URL_REVIEWS } from "../../utils/URL";
@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { authContext } from "../../context/AuthContext/AuthContext";
 
 const AddReview = () => {
-  const shop = ;
+  const { id } = useParams();
   const navigate = useNavigate();
   const { userAuth } = useContext(authContext);
 
