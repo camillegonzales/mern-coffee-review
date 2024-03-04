@@ -13,16 +13,12 @@ const UserReviews = ({ reviews }) => {
         // Fetch coffee shop data for all review coffee shops
         const response = await axios.get(`${URL_SHOPS}`);
         const coffeeShopsData = response.data;
-
-        // Create a map of coffee shop IDs to names
         const coffeeShopsMap = {};
-        // Check if coffeeShopsData is an array before iterating over it
         if (Array.isArray(coffeeShopsData)) {
           coffeeShopsData.forEach((coffeeShop) => {
             coffeeShopsMap[coffeeShop.id] = coffeeShop.name;
           });
         } else {
-          // Handle the case when coffeeShopsData is not an array
           console.log('No coffee shop data available');
         }
 
