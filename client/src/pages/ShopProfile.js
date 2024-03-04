@@ -38,7 +38,7 @@ const ShopProfile = ({ match }) => {
   const handleBookmarkClick = () => {
     if (token) {
       // User is authenticated
-      // You need to implement bookmark logic here
+      // Need to implement bookmark logic here
       console.log('Add/remove bookmark');
     } else {
       // User is not authenticated, display notification
