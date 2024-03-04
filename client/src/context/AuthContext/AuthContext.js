@@ -11,7 +11,7 @@ import {
 } from "./authActionTypes";
 import { URL_USER } from "../../utils/URL";
 import toast from "react-hot-toast";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Auth context
 export const authContext = createContext();
@@ -98,7 +98,6 @@ const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
     console.log(state?.profile)
     const navigate = useNavigate();
-    const location = useLocation();
 
     // Login action
     const loginUserAction = async (formData) => {
@@ -118,10 +117,11 @@ const AuthContextProvider = ({ children }) => {
                     type: LOGIN_SUCCESS,
                     payload: res.data,
                 });
-                const { state } = location;
-                if (state && state.from === 'add-review' && state.shop) {
-                // If shop details are present, redirect back to the shop profile page with the shop details
-                navigate('/add-review', { state: { shop: state.shop } });
+                const pendingShopId = localStorage.getItem('pendingShopId');
+                if (pendingShopId) {
+                // If shop ID present, redirect back to the shop profile page of that shop
+                navigate(`/add-review/${pendingShopId}`);
+                localStorage.removeItem('pendingShopId');
                 } else {
                 // Otherwise, redirect to the default route after login
                 navigate('/profile');

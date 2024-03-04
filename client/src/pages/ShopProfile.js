@@ -31,7 +31,8 @@ const ShopProfile = ({ match }) => {
     } else {
       // User is not authenticated, display notification 
       toast.error("You must be logged in to add a review");
-      navigate('/login', { state: { from: 'add-review', shop: shop } });
+      localStorage.setItem('pendingShopId', shop._id);
+      navigate('/login');
     }
   };
 
