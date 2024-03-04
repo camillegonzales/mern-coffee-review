@@ -27,7 +27,7 @@ const ShopProfile = ({ match }) => {
   const handleAddReviewClick = () => {
     if (token) {
       // User is authenticated, navigate to add review page
-      navigate('/add-review', { state: { shop: shop } });
+      navigate(`/add-review/${shop._id}`);
     } else {
       // User is not authenticated, display notification 
       toast.error("You must be logged in to add a review");
