@@ -64,94 +64,94 @@ const AddReview = () => {
       <h1>Rate & Review</h1>
       {shop ? (
         <>
-      <p>Coffee shop: {shop.name}</p>
-      <form onSubmit={handleSubmit}>
+          <p>Coffee shop: {shop.name}</p>
+          <form onSubmit={handleSubmit}>
 
-      <div>
-        <label>Coffee Rating:</label>
-        {[1, 2, 3, 4, 5].map((value) => (
-          <label key={value}>
-            <input
-              type="radio"
-              name="coffeeRating"
-              value={value}
-              checked={coffeeRating === value}
-              onChange={(e) => setCoffeeRating(Number(e.target.value))}
-            />
-            {value}
-          </label>
-        ))}
-      </div>
+          <div>
+            <label>Coffee Rating:</label>
+            {[1, 2, 3, 4, 5].map((value) => (
+              <label key={value}>
+                <input
+                  type="radio"
+                  name="coffeeRating"
+                  value={value}
+                  checked={coffeeRating === value}
+                  onChange={(e) => setCoffeeRating(Number(e.target.value))}
+                />
+                {value}
+              </label>
+            ))}
+          </div>
 
-      <div>
-        <label>Food Rating:</label>
-        {[1, 2, 3, 4, 5].map((value) => (
-          <label key={value}>
-            <input
-              type="radio"
-              name="foodRating"
-              value={value}
-              checked={foodRating === value}
-              onChange={(e) => setFoodRating(Number(e.target.value))}
-            />
-            {value}
-          </label>
-        ))}
-      </div>
+          <div>
+            <label>Food Rating:</label>
+            {[1, 2, 3, 4, 5].map((value) => (
+              <label key={value}>
+                <input
+                  type="radio"
+                  name="foodRating"
+                  value={value}
+                  checked={foodRating === value}
+                  onChange={(e) => setFoodRating(Number(e.target.value))}
+                />
+                {value}
+              </label>
+            ))}
+          </div>
 
-      <div>
-        <label>Seating Rating:</label>
-        {[1, 2, 3, 4, 5].map((value) => (
-          <label key={value}>
-            <input
-              type="radio"
-              name="seatingRating"
-              value={value}
-              checked={seatingRating === value}
-              onChange={(e) => setSeatingRating(Number(e.target.value))}
-            />
-            {value}
-          </label>
-        ))}
-      </div>
+          <div>
+            <label>Seating Rating:</label>
+            {[1, 2, 3, 4, 5].map((value) => (
+              <label key={value}>
+                <input
+                  type="radio"
+                  name="seatingRating"
+                  value={value}
+                  checked={seatingRating === value}
+                  onChange={(e) => setSeatingRating(Number(e.target.value))}
+                />
+                {value}
+              </label>
+            ))}
+          </div>
 
-      <div>
-        <label>Charging Rating:</label>
-        {[1, 2, 3, 4, 5].map((value) => (
-          <label key={value}>
-            <input
-              type="radio"
-              name="chargingRating"
-              value={value}
-              checked={chargingRating === value}
-              onChange={(e) => setChargingRating(Number(e.target.value))}
-            />
-            {value}
-          </label>
-        ))}
-      </div>
+          <div>
+            <label>Charging Rating:</label>
+            {[1, 2, 3, 4, 5].map((value) => (
+              <label key={value}>
+                <input
+                  type="radio"
+                  name="chargingRating"
+                  value={value}
+                  checked={chargingRating === value}
+                  onChange={(e) => setChargingRating(Number(e.target.value))}
+                />
+                {value}
+              </label>
+            ))}
+          </div>
 
-      <div>
-        <label>Noise Rating:</label>
-        {[1, 2, 3, 4, 5].map((value) => (
-          <label key={value}>
-            <input
-              type="radio"
-              name="noiseRating"
-              value={value}
-              checked={noiseRating === value}
-              onChange={(e) => setNoiseRating(Number(e.target.value))}
-            />
-            {value}
-          </label>
-        ))}
-      </div>
-        <div>
-          <label>Comment:</label>
-          <textarea value={comment} onChange={(e) => setComment(e.target.value)} />
-        </div>
-        <button type="submit">Submit Review</button>
-      </form>
+          <div>
+            <label>Noise Rating:</label>
+            {[1, 2, 3, 4, 5].map((value) => (
+              <label key={value}>
+                <input
+                  type="radio"
+                  name="noiseRating"
+                  value={value}
+                  checked={noiseRating === value}
+                  onChange={(e) => setNoiseRating(Number(e.target.value))}
+                />
+                {value}
+              </label>
+            ))}
+          </div>
+            <div>
+              <label>Comment:</label>
+              <textarea value={comment} onChange={(e) => setComment(e.target.value)} />
+            </div>
+            <button type="submit">Submit Review</button>
+          </form>
       </>
       ) : (
         <p>Loading shop data...</p>
