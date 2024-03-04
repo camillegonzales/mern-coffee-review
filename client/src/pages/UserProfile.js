@@ -5,10 +5,9 @@ import UserReviews from "../components/Profile/UserReviews";
 import { formatDate } from "../utils/formatDate";
 
 const UserProfile = () => {
-  const { fetchProfileAction, profile, error } = useContext(authContext);
+  const { fetchProfileAction, profile } = useContext(authContext);
   const [formattedCreatedAt, setFormattedCreatedAt] = useState('');
 
-  // Fetch user profile on component mount
   useEffect(() => {
     fetchProfileAction();
   }, []);
@@ -16,25 +15,19 @@ const UserProfile = () => {
   // Format createdAt date
   useEffect(() => {
     if (profile?.createdAt) {
-      setFormattedCreatedAt(formatDate(profile.createdAt)); // Use the formatDate function
+      setFormattedCreatedAt(formatDate(profile.createdAt));
     }
   }, [profile?.createdAt]);
 
   return (
     <>
-      {error ? (
-        <div>Error: {error}</div>
-      ) : (
-        <>
-          <h1>Welcome, {profile?.userName}</h1>
-          <h2>User Information:</h2>
-          <p>Email: {profile?.email}</p>
-          <p>Joined: {formattedCreatedAt}</p>
+      <h1>Welcome, {profile?.userName}</h1>
+      <h2>User Information:</h2>
+      <p>Email: {profile?.email}</p>
+      <p>Joined: {formattedCreatedAt}</p>
 
-          <UserBookmarks bookmarks={profile?.bookmarks} />
-          <UserReviews reviews={profile?.reviews} />
-        </>
-      )}
+      <UserBookmarks bookmarks={profile?.bookmarks} />
+      <UserReviews reviews={profile?.reviews} />
     </>
   );
 };
