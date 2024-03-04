@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
-import { useContext, useState } from 'react';
-import { URL_REVIEWS } from "../../utils/URL";
+import { useContext, useEffect, useState } from 'react';
+import { URL_REVIEWS, URL_SHOPS } from "../../utils/URL";
 import toast from "react-hot-toast";
 import { authContext } from "../../context/AuthContext/AuthContext";
 
@@ -9,6 +9,7 @@ const AddReview = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { userAuth } = useContext(authContext);
+  const [shop, setShop] = useState(null);
 
   const [coffeeRating, setCoffeeRating] = useState('');
   const [foodRating, setFoodRating] = useState('');
@@ -16,6 +17,19 @@ const AddReview = () => {
   const [chargingRating, setChargingRating] = useState('');
   const [noiseRating, setNoiseRating] = useState('');
   const [comment, setComment] = useState('');
+
+  useEffect(() => {
+    const fetchShop = async () => {
+      try {
+        const response = await axios.get(`${URL_SHOPS}/${id}`);
+        setShop(response.data.data);
+      } catch (error) {
+        console.error('Error fetching shop:', error);
+      }
+    };
+
+    fetchShop();
+  }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,6 +62,8 @@ const AddReview = () => {
   return (
     <div>
       <h1>Rate & Review</h1>
+      {shop ? (
+        <>
       <p>Coffee shop: {shop.name}</p>
       <form onSubmit={handleSubmit}>
 
@@ -136,6 +152,10 @@ const AddReview = () => {
         </div>
         <button type="submit">Submit Review</button>
       </form>
+      </>
+      ) : (
+        <p>Loading shop data...</p>
+      )}
     </div>
   );
 };
