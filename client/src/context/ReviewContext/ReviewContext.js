@@ -108,6 +108,7 @@ const ReviewContextProvider = ({ children }) => {
           type: REVIEW_CREATION_SUCCESS,
           payload: res?.data,
         });
+        toast.success('Review added successfully');
         navigate(`/shop/${formData.coffeeShop}`)
       } else {
         toast.error(res.data.error)
