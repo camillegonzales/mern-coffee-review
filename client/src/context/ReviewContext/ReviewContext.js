@@ -13,11 +13,11 @@ export const reviewContext = createContext();
 
 // Initial State
 const INITIAL_STATE = {
-  userAuth: JSON.parse(localStorage.getItem("userAuth")),
   review: null,
   reviews: [],
   loading: false,
   error: null,
+  token: JSON.parse(localStorage.getItem("userAuth"))
 };
 
 // Reducer
@@ -67,7 +67,7 @@ const ReviewContextProvider = ({ children }) => {
   const getReviewDetailsAction = async (id) => {
     const config = {
       headers: {
-        Authorization: `Bearer ${state?.userAuth?.token}`,
+        Authorization: `Bearer ${state?.token?.token}`,
         "Content-Type": "application/json",
       },
     };
@@ -95,15 +95,16 @@ const ReviewContextProvider = ({ children }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${state?.userAuth?.token}`,
+        Authorization: `Bearer ${state?.token?.token}`,
       },
     };
     try {
-      const res = await axios.post(`${URL_REVIEWS}`, formData, config);
+      const res = await axios.post(URL_REVIEWS, formData, config);
+      console.log(res)
       if (res?.data?.status === "success") {
         dispatch({
           type: REVIEW_CREATION_SUCCESS,
-          payload: res?.data?.data,
+          payload: res?.data,
         });
       } else {
         toast.error(res.data.error)

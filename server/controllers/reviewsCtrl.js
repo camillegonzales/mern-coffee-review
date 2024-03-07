@@ -7,7 +7,6 @@ const createReviewCtrl = async (req,res) => {
     try {
         console.log('submitted. trying to create.')
         const {
-            user,
             coffeeShop,
             coffeeRating,
             foodRating,
@@ -18,7 +17,7 @@ const createReviewCtrl = async (req,res) => {
         } = req.body;
 
         // Find the logged in user
-        const userFound = await User.findById(user);
+        const userFound = await User.findById(req.user);
         if (!userFound) {
             return res.json({
                 error: "Please login to proceed"
@@ -34,6 +33,7 @@ const createReviewCtrl = async (req,res) => {
         }
 
         if (!coffeeRating || !foodRating || !seatingRating || !chargingRating || !noiseRating) {
+            console.log(req.body)
             return res.json({
                 error: "Please choose a rating for all categories"
             });
@@ -42,8 +42,8 @@ const createReviewCtrl = async (req,res) => {
         console.log('no errors. going to submit')
         // Create the review
         const review = await Review.create({
-            user: userFound._id,
-            coffeeShop: coffeeShopFound._id,
+            user: req.user,
+            coffeeShop: coffeeShop,
             coffeeRating,
             foodRating,
             seatingRating,
