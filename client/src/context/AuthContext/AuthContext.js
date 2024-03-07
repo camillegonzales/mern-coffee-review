@@ -158,7 +158,7 @@ const AuthContextProvider = ({ children }) => {
                 toast.success('Sign-up successful. Welcome!');
                 // Delay redirect by 2 seconds to show notification
                 setTimeout(() => {
-                    window.location.href = '/login';
+                    navigate('/login');
                 }, 2000);
             } else {
                 toast.error(res.data.error)
