@@ -8,6 +8,7 @@ import {
 } from "./reviewActionTypes";
 import { URL_REVIEWS } from "../../utils/URL";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const reviewContext = createContext();
 
@@ -62,6 +63,7 @@ const reviewReducer = (state, action) => {
 // Provider
 const ReviewContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reviewReducer, INITIAL_STATE);
+  const navigate = useNavigate();
 
   // Get Review Details Action
   const getReviewDetailsAction = async (id) => {
@@ -106,6 +108,7 @@ const ReviewContextProvider = ({ children }) => {
           type: REVIEW_CREATION_SUCCESS,
           payload: res?.data,
         });
+        navigate(`/shop/${formData.coffeeShop}`)
       } else {
         toast.error(res.data.error)
       }
