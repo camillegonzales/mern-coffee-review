@@ -12,7 +12,7 @@ const UserReviews = ({ reviews }) => {
       try {
         // Fetch coffee shop data for all review coffee shops
         const response = await axios.get(`${URL_SHOPS}`);
-        const coffeeShopsData = response.data;
+        const coffeeShopsData = response.data.data;
         const coffeeShopsMap = {};
         if (Array.isArray(coffeeShopsData)) {
           coffeeShopsData.forEach((coffeeShop) => {
