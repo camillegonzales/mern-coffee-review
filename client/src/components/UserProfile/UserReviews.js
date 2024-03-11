@@ -1,16 +1,18 @@
 // UserReviews.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { URL_SHOPS } from '../../utils/URL';
 import { formatDate } from '../../utils/formatDate';
+import { reviewContext } from '../../context/ReviewContext/ReviewContext';
 
-const UserReviews = ({ reviews }) => {
+const UserReviews = ({ reviews, onDeleteReview }) => {
   const [coffeeShops, setCoffeeShops] = useState({});
+  const [localReviews, setLocalReviews] = useState(reviews);
+  const { deleteReviewAction } = useContext(reviewContext); 
 
   useEffect(() => {
     const fetchCoffeeShops = async () => {
       try {
-        // Fetch coffee shop data for all review coffee shops
         const response = await axios.get(`${URL_SHOPS}`);
         const coffeeShopsData = response.data.data;
         const coffeeShopsMap = {};
@@ -30,6 +32,23 @@ const UserReviews = ({ reviews }) => {
 
     fetchCoffeeShops();
   }, []);
+
+  // Update local reviews state when reviews prop changes
+  useEffect(() => {
+    setLocalReviews(reviews);
+  }, [reviews]);
+
+  const handleDeleteReviewClick = async (reviewId) => {
+    try {
+      await deleteReviewAction(reviewId);
+      onDeleteReview(reviewId);
+
+      // Update local reviews state after deletion
+      setLocalReviews(localReviews.filter(review => review._id !== reviewId));
+    } catch (error) {
+      console.error('Error deleting review:', error);
+    }
+  };
 
   return (
     <div>
@@ -62,7 +81,7 @@ const UserReviews = ({ reviews }) => {
                 <td>{review.comment}</td>
                 <td>
                   <button>Edit</button>
-                  <button>Delete</button>
+                  <button onClick={() => handleDeleteReviewClick(review._id)}>Delete</button>
                 </td>
               </tr>
             ))}

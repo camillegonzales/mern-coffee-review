@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../context/AuthContext/AuthContext";
+import { reviewContext } from '../context/ReviewContext/ReviewContext';
 import UserBookmarks from "../components/UserProfile/UserBookmarks";
 import UserReviews from "../components/UserProfile/UserReviews";
 import { formatDate } from "../utils/formatDate";
 
 const UserProfile = () => {
   const { fetchProfileAction, profile } = useContext(authContext);
+  const { deleteReviewAction } = useContext(reviewContext);
   const [formattedCreatedAt, setFormattedCreatedAt] = useState('');
 
   useEffect(() => {
@@ -19,6 +21,10 @@ const UserProfile = () => {
     }
   }, [profile?.createdAt]);
 
+  const handleDeleteReview = (reviewId) => {
+    deleteReviewAction(reviewId);
+  };
+
   return (
     <>
       <h1>Welcome, {profile?.userName}</h1>
@@ -27,7 +33,7 @@ const UserProfile = () => {
       <p>Joined: {formattedCreatedAt}</p>
 
       <UserBookmarks bookmarks={profile?.bookmarks} />
-      <UserReviews reviews={profile?.reviews} />
+      <UserReviews reviews={profile?.reviews} onDeleteReview={handleDeleteReview} />
     </>
   );
 };
