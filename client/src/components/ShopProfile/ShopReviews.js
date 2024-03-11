@@ -1,11 +1,13 @@
 // ShopReviews.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { URL_USER } from '../../utils/URL';
 import { formatDate } from '../../utils/formatDate';
+import { authContext } from '../../context/AuthContext/AuthContext';
 
 const ShopReviews = ({ reviews }) => {
   const [users, setUsers] = useState({});
+  const { userAuth } = useContext(authContext);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -18,12 +20,12 @@ const ShopReviews = ({ reviews }) => {
               usersMap[user.id] = user.userName;
             });
           } else {
-            console.log('No coffee shop data available');
+            console.log('No user data available');
           }
   
           setUsers(usersMap);
         } catch (error) {
-          console.error('Error fetching coffee shop data:', error);
+          console.error('Error fetching user data:', error);
         }
       };
 
@@ -59,8 +61,12 @@ const ShopReviews = ({ reviews }) => {
                 <td>{review.noiseRating}</td>
                 <td>{review.comment}</td>
                 <td>
-                  <button>Edit</button>
-                  <button>Delete</button>
+                    { userAuth && JSON.parse(localStorage.getItem('userAuth'))?.userFound?._id  === review.user && (
+                        <>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                        </>
+                    )}
                 </td>
               </tr>
             ))}
