@@ -3,7 +3,9 @@ import axios from 'axios';
 import { URL_SHOPS } from '../utils/URL';
 import { useParams, useNavigate } from 'react-router-dom';
 import { authContext } from "../context/AuthContext/AuthContext";
+import ShopReviews from "../components/ShopProfile/ShopReviews";
 import toast from 'react-hot-toast';
+
 
 const ShopProfile = ({ match }) => {
   const [shop, setShop] = useState(null);
@@ -66,24 +68,7 @@ const ShopProfile = ({ match }) => {
 
       <h2>Reviews</h2>
       <button onClick={handleAddReviewClick}>Add Review</button>
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Rating</th>
-            <th>Comment</th>
-          </tr>
-        </thead>
-        <tbody>
-          {shop.reviews.map((review) => (
-            <tr key={review._id}>
-              <td>{review.user}</td>
-              <td>{review.rating}</td>
-              <td>{review.comment}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ShopReviews reviews={shop?.reviews} />
     </div>
   );
 };

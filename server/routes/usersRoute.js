@@ -5,6 +5,7 @@ const {
     userProfileCtrl,
     deleteUserCtrl,
     updateUserCtrl,
+    getUsersCtrl
 } = require("../controllers/usersCtrl");
 const isLogin = require("../middlewares/isLogin");
 const usersRoute = express.Router();
@@ -24,5 +25,8 @@ usersRoute.delete("/", isLogin, deleteUserCtrl);
 
 // PUT/users
 usersRoute.put("/", isLogin, updateUserCtrl);
+
+// GET/users
+usersRoute.get("/", getUsersCtrl);
 
 module.exports = usersRoute;

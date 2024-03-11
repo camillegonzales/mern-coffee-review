@@ -155,10 +155,24 @@ const updateUserCtrl = async (req,res) => {
     }
 };
 
+// Get all users
+const getUsersCtrl = async (req,res) => {
+    try {
+        const users = await User.find();
+        res.json({
+            staus: "success",
+            data: users
+        });
+    } catch (error) {
+        res.json(error);
+    }
+};
+
 module.exports = {
     registerUserCrtl,
     userLoginCtrl,
     userProfileCtrl,
     deleteUserCtrl,
     updateUserCtrl,
+    getUsersCtrl
 };

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../context/AuthContext/AuthContext";
-import UserBookmarks from "../components/Profile/UserBookmarks";
-import UserReviews from "../components/Profile/UserReviews";
+import UserBookmarks from "../components/UserProfile/UserBookmarks";
+import UserReviews from "../components/UserProfile/UserReviews";
 import { formatDate } from "../utils/formatDate";
 
 const UserProfile = () => {
