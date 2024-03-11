@@ -4,10 +4,12 @@ import axios from 'axios';
 import { URL_USER } from '../../utils/URL';
 import { formatDate } from '../../utils/formatDate';
 import { authContext } from '../../context/AuthContext/AuthContext';
+import { reviewContext } from '../../context/ReviewContext/ReviewContext';
 
 const ShopReviews = ({ reviews }) => {
   const [users, setUsers] = useState({});
   const { userAuth } = useContext(authContext);
+  const { deleteReviewAction } = useContext(reviewContext); 
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -31,6 +33,10 @@ const ShopReviews = ({ reviews }) => {
 
     fetchUsers();
   }, []);
+
+  const handleDeleteReviewClick = (reviewId) => {
+    deleteReviewAction(reviewId);
+  };
 
   return (
     <div>
@@ -64,7 +70,7 @@ const ShopReviews = ({ reviews }) => {
                     { userAuth && JSON.parse(localStorage.getItem('userAuth'))?.userFound?._id  === review.user && (
                         <>
                             <button>Edit</button>
-                            <button>Delete</button>
+                            <button onClick={() => handleDeleteReviewClick(review._id)}>Delete</button>
                         </>
                     )}
                 </td>
