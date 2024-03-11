@@ -41,16 +41,16 @@ const SearchPage = () => {
     }
   };
 
-  const handleNeighborhoodChange = (event) => {
-    setSelectedNeighborhood(event.target.value);
+  const handleNeighborhoodChange = (e) => {
+    setSelectedNeighborhood(e.target.value);
   };
 
-  const handleRatingTypeChange = (event) => {
-    setSelectedRatingType(event.target.value);
+  const handleRatingTypeChange = (e) => {
+    setSelectedRatingType(e.target.value);
   };
 
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
     fetchCoffeeShops();
   };
 
