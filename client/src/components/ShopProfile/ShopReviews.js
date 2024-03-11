@@ -6,7 +6,7 @@ import { formatDate } from '../../utils/formatDate';
 import { authContext } from '../../context/AuthContext/AuthContext';
 import { reviewContext } from '../../context/ReviewContext/ReviewContext';
 
-const ShopReviews = ({ reviews }) => {
+const ShopReviews = ({ reviews, onDeleteReview }) => {
   const [users, setUsers] = useState({});
   const { userAuth } = useContext(authContext);
   const { deleteReviewAction } = useContext(reviewContext); 
@@ -34,8 +34,13 @@ const ShopReviews = ({ reviews }) => {
     fetchUsers();
   }, []);
 
-  const handleDeleteReviewClick = (reviewId) => {
-    deleteReviewAction(reviewId);
+  const handleDeleteReviewClick = async (reviewId) => {
+    try {
+        await deleteReviewAction(reviewId);
+        onDeleteReview(reviewId); // Call the parent function to update reviews state
+    } catch (error) {
+        console.error('Error deleting review:', error);
+    }
   };
 
   return (

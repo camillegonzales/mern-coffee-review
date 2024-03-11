@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 
 const ShopProfile = ({ match }) => {
   const [shop, setShop] = useState(null);
+  const [shopReviews, setShopReviews] = useState(null);
   const { id } = useParams();
   const { token } = useContext(authContext);
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const ShopProfile = ({ match }) => {
       try {
         const response = await axios.get(`${URL_SHOPS}/${id}`);
         setShop(response.data.data);
+        setShopReviews(response.data.data.reviews);
       } catch (error) {
         console.error('Error fetching shop:', error);
       }
@@ -36,6 +38,11 @@ const ShopProfile = ({ match }) => {
       localStorage.setItem('pendingShopId', shop._id);
       navigate('/login');
     }
+  };
+
+  const handleDeleteReview = (reviewId) => {
+    const updatedReviews = shopReviews.filter(review => review._id !== reviewId);
+    setShopReviews(updatedReviews);
   };
 
   const handleBookmarkClick = () => {
@@ -68,7 +75,7 @@ const ShopProfile = ({ match }) => {
 
       <h2>Reviews</h2>
       <button onClick={handleAddReviewClick}>Add Review</button>
-      <ShopReviews reviews={shop?.reviews} />
+      <ShopReviews reviews={shopReviews} onDeleteReview={handleDeleteReview} />
     </div>
   );
 };
