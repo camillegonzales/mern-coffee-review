@@ -2,10 +2,73 @@ const CoffeeShop = require("../models/CoffeeShop");
 const Review = require("../models/Review");
 const User = require("../models/User");
 
+// Calculate average ratings
+const calculateAverageRatings = (reviews) => {
+    if (!reviews || reviews.length === 0) {
+        return {
+            coffeeRating: 0,
+            foodRating: 0,
+            seatingRating: 0,
+            chargingRating: 0,
+            noiseRating: 0
+        };
+    }
+
+    const totalReviews = reviews.length;
+    const sum = reviews.reduce((acc, review) => {
+        acc.coffeeRating += review.coffeeRating;
+        acc.foodRating += review.foodRating;
+        acc.seatingRating += review.seatingRating;
+        acc.chargingRating += review.chargingRating;
+        acc.noiseRating += review.noiseRating;
+        return acc;
+    }, {
+        coffeeRating: 0,
+        foodRating: 0,
+        seatingRating: 0,
+        chargingRating: 0,
+        noiseRating: 0
+    });
+
+    return {
+        coffeeRating: sum.coffeeRating / totalReviews,
+        foodRating: sum.foodRating / totalReviews,
+        seatingRating: sum.seatingRating / totalReviews,
+        chargingRating: sum.chargingRating / totalReviews,
+        noiseRating: sum.noiseRating / totalReviews
+    };
+};
+
+// Update coffee shop ratings
+const updateCoffeeShopRatings = async (coffeeShopId) => {
+    try {
+        // Find the coffee shop
+        const coffeeShop = await CoffeeShop.findById(coffeeShopId).populate('reviews');
+
+        if (!coffeeShop) {
+            throw new Error('Coffee shop not found');
+        }
+
+        // Calculate average ratings
+        const averageRatings = calculateAverageRatings(coffeeShop.reviews);
+
+        // Update coffee shop with new ratings
+        coffeeShop.coffeeRating = averageRatings.coffeeRating;
+        coffeeShop.foodRating = averageRatings.foodRating;
+        coffeeShop.seatingRating = averageRatings.seatingRating;
+        coffeeShop.chargingRating = averageRatings.chargingRating;
+        coffeeShop.noiseRating = averageRatings.noiseRating;
+
+        // Save the updated coffee shop
+        await coffeeShop.save();
+    } catch (error) {
+        throw new Error(`Failed to update coffee shop ratings: ${error.message}`);
+    }
+};
+
 // Create review
 const createReviewCtrl = async (req,res) => {
     try {
-        console.log('submitted. trying to create.')
         const {
             coffeeShop,
             coffeeRating,
@@ -39,7 +102,6 @@ const createReviewCtrl = async (req,res) => {
             });
         }
         
-        console.log('no errors. going to submit')
         // Create the review
         const review = await Review.create({
             user: req.user,
@@ -59,6 +121,9 @@ const createReviewCtrl = async (req,res) => {
         // Push the review in to the coffeeshop's reviews field
         coffeeShopFound.reviews.push(review._id);
         await coffeeShopFound.save();
+
+        // Update coffee shop ratings
+        await updateCoffeeShopRatings(coffeeShop);
 
         res.json({
             status: "success",
@@ -145,6 +210,9 @@ const deleteReviewCtrl = async (req,res) => {
         await CoffeeShop.findByIdAndUpdate(review.coffeeShop, {
             $pull: { reviews: id }
         });
+
+        // Update coffee shop ratings
+        await updateCoffeeShopRatings(review.coffeeShop);
 
         // Delete the review from the database
         await Review.findByIdAndDelete(id);
