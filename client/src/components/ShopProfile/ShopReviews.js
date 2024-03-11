@@ -5,11 +5,13 @@ import { URL_USER } from '../../utils/URL';
 import { formatDate } from '../../utils/formatDate';
 import { authContext } from '../../context/AuthContext/AuthContext';
 import { reviewContext } from '../../context/ReviewContext/ReviewContext';
+import { useNavigate } from 'react-router-dom';
 
 const ShopReviews = ({ reviews, onDeleteReview }) => {
   const [users, setUsers] = useState({});
   const { userAuth } = useContext(authContext);
   const { deleteReviewAction } = useContext(reviewContext); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -33,6 +35,10 @@ const ShopReviews = ({ reviews, onDeleteReview }) => {
 
     fetchUsers();
   }, []);
+
+  const handleEditReviewClick = (reviewId) => {
+    navigate(`/edit-review/${reviewId}`);
+  };
 
   const handleDeleteReviewClick = async (reviewId) => {
     try {
@@ -74,7 +80,7 @@ const ShopReviews = ({ reviews, onDeleteReview }) => {
                 <td>
                     { userAuth && JSON.parse(localStorage.getItem('userAuth'))?.userFound?._id  === review.user && (
                         <>
-                            <button>Edit</button>
+                            <button onClick={() => handleEditReviewClick(review._id)}>Edit</button>
                             <button onClick={() => handleDeleteReviewClick(review._id)}>Delete</button>
                         </>
                     )}
