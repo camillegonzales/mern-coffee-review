@@ -40,9 +40,14 @@ const ShopProfile = ({ match }) => {
     }
   };
 
-  const handleDeleteReview = (reviewId) => {
+  const handleDeleteReview = async (reviewId) => {
     const updatedReviews = shopReviews.filter(review => review._id !== reviewId);
     setShopReviews(updatedReviews);
+
+    const response = await axios.get(`${URL_SHOPS}/${id}`);
+    const updatedShopData = response.data.data;
+
+    setShop(updatedShopData);
     toast.success("Review deleted successfully")
   };
 
