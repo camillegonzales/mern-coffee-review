@@ -12,7 +12,8 @@ const UserProfile = () => {
 
   useEffect(() => {
     fetchProfileAction();
-  });
+    // eslint-disable-next-line
+  }, []);
 
   // Format createdAt date
   useEffect(() => {
