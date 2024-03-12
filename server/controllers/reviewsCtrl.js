@@ -190,6 +190,13 @@ const updateReviewCtrl = async (req,res) => {
                 error: "Review not found" 
             });
         }
+
+        try {
+            await updateCoffeeShopRatings(updatedReview.coffeeShop);
+        } catch (error) {
+            console.error("Error updating coffee shop ratings:", error);
+        }
+        
         res.json({
             status: "success",
             data: updatedReview

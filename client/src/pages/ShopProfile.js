@@ -81,7 +81,7 @@ const ShopProfile = ({ match }) => {
 
       <h2>Reviews</h2>
       <button onClick={handleAddReviewClick}>Add Review</button>
-      <ShopReviews reviews={shopReviews} onDeleteReview={handleDeleteReview} />
+      <ShopReviews reviews={shopReviews} onDeleteReview={handleDeleteReview} shopID={shop.id} />
     </div>
   );
 };

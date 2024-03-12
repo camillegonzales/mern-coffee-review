@@ -1,13 +1,13 @@
 // ShopReviews.js
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { URL_USER } from '../../utils/URL';
+import { URL_USER, URL_SHOPS } from '../../utils/URL';
 import { formatDate } from '../../utils/formatDate';
 import { authContext } from '../../context/AuthContext/AuthContext';
 import { reviewContext } from '../../context/ReviewContext/ReviewContext';
 import { useNavigate } from 'react-router-dom';
 
-const ShopReviews = ({ reviews, onDeleteReview }) => {
+const ShopReviews = ({ reviews, onDeleteReview, shopID }) => {
   const [users, setUsers] = useState({});
   const { userAuth } = useContext(authContext);
   const { deleteReviewAction } = useContext(reviewContext); 
@@ -37,6 +37,7 @@ const ShopReviews = ({ reviews, onDeleteReview }) => {
   }, []);
 
   const handleEditReviewClick = (reviewId) => {
+    localStorage.setItem('goBack', `/shop/${shopID}`);
     navigate(`/edit-review/${reviewId}`);
   };
 

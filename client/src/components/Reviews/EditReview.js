@@ -9,14 +9,7 @@ const EditReview = () => {
   const { updateReviewAction } = useContext(reviewContext);
   const [coffeeShop, setCoffeeShop] = useState(null);
   const [review, setReview] = useState(null);
-  const [formData, setFormData] = useState({
-    coffeeRating: "",
-    foodRating: "",
-    seatingRating: "",
-    chargingRating: "",
-    noiseRating: "",
-    comment: ""
-  });
+  const [formData, setFormData] = useState(null);
 
   useEffect(() => {
     const fetchReview = async () => {
@@ -24,26 +17,27 @@ const EditReview = () => {
         const response = await axios.get(`${URL_REVIEWS}/${id}`);
         const reviewData = response.data.data;
         setReview(reviewData);
-        setFormData({
-          coffeeRating: reviewData.coffeeRating.toString(),
-          foodRating: reviewData.foodRating.toString(),
-          seatingRating: reviewData.seatingRating.toString(),
-          chargingRating: reviewData.chargingRating.toString(),
-          noiseRating: reviewData.noiseRating.toString(),
-          comment: reviewData.comment
-        });
+        if (formData === null) {
+          setFormData({
+            reviewId: reviewData._id,
+            coffeeRating: reviewData.coffeeRating.toString(),
+            foodRating: reviewData.foodRating.toString(),
+            seatingRating: reviewData.seatingRating.toString(),
+            chargingRating: reviewData.chargingRating.toString(),
+            noiseRating: reviewData.noiseRating.toString(),
+            comment: reviewData.comment
+          });
+        }
 
         const coffeeShopResponse = await axios.get(`${URL_SHOPS}/${reviewData.coffeeShop}`);
-        console.log(coffeeShopResponse.data.data)
         setCoffeeShop(coffeeShopResponse.data.data);
-        console.log(coffeeShop)
       } catch (error) {
         console.error('Error fetching review:', error);
       }
     };
 
     fetchReview();
-  }, [id]);
+  }, [id, formData]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,13 +45,13 @@ const EditReview = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateReviewAction(id, formData); 
+    updateReviewAction(formData); 
   };
 
   return (
     <div>
       <h1>Edit Review</h1>
-      {review && coffeeShop ? (
+      {review && coffeeShop && formData ? (
         <>
           <p>Coffee shop: {coffeeShop.name}</p>
           <form onSubmit={handleSubmit}>

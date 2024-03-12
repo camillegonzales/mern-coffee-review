@@ -41,6 +41,7 @@ const UserReviews = ({ reviews, onDeleteReview }) => {
   }, [reviews]);
 
   const handleEditReviewClick = (reviewId) => {
+    localStorage.setItem('goBack', '/profile');
     navigate(`/edit-review/${reviewId}`);
   };
 
