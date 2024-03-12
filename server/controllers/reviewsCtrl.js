@@ -220,11 +220,12 @@ const deleteReviewCtrl = async (req,res) => {
             $pull: { reviews: id }
         });
 
-        console.log("pre update avg ratings")
-        // Update coffee shop ratings
-        await updateCoffeeShopRatings(review.coffeeShop);
-        console.log("post avg ratings")
-
+        try {
+            // Update coffee shop ratings
+            await updateCoffeeShopRatings(review.coffeeShop);
+        } catch (error) {
+            console.error("Error updating coffee shop ratings:", error);
+        }
         // Delete the review from the database
         await Review.findByIdAndDelete(id);
 
@@ -238,6 +239,8 @@ const deleteReviewCtrl = async (req,res) => {
 };
 
 module.exports = {
+    calculateAverageRatings,
+    updateCoffeeShopRatings,
     createReviewCtrl,
     getReviewCtrl,
     updateReviewCtrl,

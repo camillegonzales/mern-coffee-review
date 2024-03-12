@@ -68,11 +68,11 @@ const ShopProfile = ({ match }) => {
       <img src={shop.image} alt={shop.name} />
       <p>Neighborhood: {shop.neighborhood.name}</p>
       <p>Address: {shop.address}</p>
-      <p>Coffee Rating: {shop.coffeeRating}</p>
-      <p>Food Rating: {shop.foodRating}</p>
-      <p>Seating Rating: {shop.seatingRating}</p>
-      <p>Charging Rating: {shop.chargingRating}</p>
-      <p>Noise Rating: {shop.noiseRating}</p>
+      <p>Coffee Rating: {shop.coffeeRating || "N/A"}</p>
+      <p>Food Rating: {shop.foodRating || "N/A"}</p>
+      <p>Seating Rating: {shop.seatingRating || "N/A"}</p>
+      <p>Charging Rating: {shop.chargingRating || "N/A"}</p>
+      <p>Noise Rating: {shop.noiseRating || "N/A"}</p>
 
       <h2>Reviews</h2>
       <button onClick={handleAddReviewClick}>Add Review</button>
