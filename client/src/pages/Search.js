@@ -8,6 +8,7 @@ const SearchPage = () => {
   const [selectedNeighborhood, setSelectedNeighborhood] = useState('');
   const [selectedRatingType, setSelectedRatingType] = useState('');
   const [coffeeShops, setCoffeeShops] = useState([]);
+  const [showTable, setShowTable] = useState(false);
 
   useEffect(() => {
     const fetchNeighborhoods = async () => {
@@ -36,6 +37,7 @@ const SearchPage = () => {
 
       const response = await axios.get(URL_SHOPS, { params });
       setCoffeeShops(response.data.data);
+      setShowTable(true);
     } catch (error) {
       console.error('Error fetching coffee shops:', error);
     }
@@ -80,32 +82,34 @@ const SearchPage = () => {
         </div>
         <button type="submit">Search</button>
       </form>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Neighborhood</th>
-            <th>Coffee Rating</th>
-            <th>Food Rating</th>
-            <th>Seating Rating</th>
-            <th>Charging Rating</th>
-            <th>Noise Rating</th>
-          </tr>
-        </thead>
-        <tbody>
-          {coffeeShops.map((coffeeShop) => (
-            <tr key={coffeeShop._id}>
-              <td><Link to={`/shop/${coffeeShop._id}`}>{coffeeShop.name}</Link></td>
-              <td>{coffeeShop.neighborhood.name}</td> {/* Assuming neighborhood object has 'name' property */}
-              <td>{coffeeShop.coffeeRating || 'N/A'}</td>
-              <td>{coffeeShop.foodRating || 'N/A'}</td>
-              <td>{coffeeShop.seatingRating || 'N/A'}</td>
-              <td>{coffeeShop.chargingRating || 'N/A'}</td>
-              <td>{coffeeShop.noiseRating || 'N/A'}</td>
+      {showTable && (
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Neighborhood</th>
+              <th>Coffee Rating</th>
+              <th>Food Rating</th>
+              <th>Seating Rating</th>
+              <th>Charging Rating</th>
+              <th>Noise Rating</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {coffeeShops.map((coffeeShop) => (
+              <tr key={coffeeShop._id}>
+                <td><Link to={`/shop/${coffeeShop._id}`}>{coffeeShop.name}</Link></td>
+                <td>{coffeeShop.neighborhood.name}</td> {/* Assuming neighborhood object has 'name' property */}
+                <td>{coffeeShop.coffeeRating || 'N/A'}</td>
+                <td>{coffeeShop.foodRating || 'N/A'}</td>
+                <td>{coffeeShop.seatingRating || 'N/A'}</td>
+                <td>{coffeeShop.chargingRating || 'N/A'}</td>
+                <td>{coffeeShop.noiseRating || 'N/A'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
