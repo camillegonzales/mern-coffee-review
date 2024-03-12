@@ -51,16 +51,16 @@ const ShopProfile = ({ match }) => {
     toast.success("Review deleted successfully")
   };
 
-  const handleBookmarkClick = () => {
-    if (token) {
-      // User is authenticated
-      // Need to implement bookmark logic here
-      console.log('Add/remove bookmark');
-    } else {
-      // User is not authenticated, display notification
-      console.log('User not authenticated');
-    }
-  };
+  // const handleBookmarkClick = () => {
+  //   if (token) {
+  //     // User is authenticated
+  //     // Need to implement bookmark logic here
+  //     console.log('Add/remove bookmark');
+  //   } else {
+  //     // User is not authenticated, display notification
+  //     console.log('User not authenticated');
+  //   }
+  // };
 
   if (!shop) {
     return <div>Loading...</div>;
@@ -69,7 +69,7 @@ const ShopProfile = ({ match }) => {
   return (
     <div>
       <h1>{shop.name}</h1>
-      <button onClick={handleBookmarkClick}>Bookmark</button>
+      {/* <button onClick={handleBookmarkClick}>Bookmark</button> */}
       <img src={shop.image} alt={shop.name} />
       <p>Neighborhood: {shop.neighborhood.name}</p>
       <p>Address: {shop.address}</p>
@@ -81,7 +81,7 @@ const ShopProfile = ({ match }) => {
 
       <h2>Reviews</h2>
       <button onClick={handleAddReviewClick}>Add Review</button>
-      <ShopReviews reviews={shopReviews} onDeleteReview={handleDeleteReview} />
+      <ShopReviews reviews={shopReviews} onDeleteReview={handleDeleteReview} shopID={shop.id} />
     </div>
   );
 };

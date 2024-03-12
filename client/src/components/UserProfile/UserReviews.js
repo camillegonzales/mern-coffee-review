@@ -3,13 +3,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { URL_SHOPS } from '../../utils/URL';
 import { formatDate } from '../../utils/formatDate';
-// import toast from 'react-hot-toast';
 import { reviewContext } from '../../context/ReviewContext/ReviewContext';
+import { useNavigate } from 'react-router-dom';
 
 const UserReviews = ({ reviews, onDeleteReview }) => {
   const [coffeeShops, setCoffeeShops] = useState({});
   const [localReviews, setLocalReviews] = useState(reviews);
   const { deleteReviewAction } = useContext(reviewContext); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCoffeeShops = async () => {
@@ -38,6 +39,11 @@ const UserReviews = ({ reviews, onDeleteReview }) => {
   useEffect(() => {
     setLocalReviews(reviews);
   }, [reviews]);
+
+  const handleEditReviewClick = (reviewId) => {
+    localStorage.setItem('goBack', '/profile');
+    navigate(`/edit-review/${reviewId}`);
+  };
 
   const handleDeleteReviewClick = async (reviewId) => {
     try {
@@ -81,7 +87,7 @@ const UserReviews = ({ reviews, onDeleteReview }) => {
                 <td>{review.noiseRating}</td>
                 <td>{review.comment}</td>
                 <td>
-                  <button>Edit</button>
+                  <button onClick={() => handleEditReviewClick(review._id)}>Edit</button>
                   <button onClick={() => handleDeleteReviewClick(review._id)}>Delete</button>
                 </td>
               </tr>
