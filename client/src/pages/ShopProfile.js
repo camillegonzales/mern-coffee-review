@@ -43,6 +43,7 @@ const ShopProfile = ({ match }) => {
   const handleDeleteReview = (reviewId) => {
     const updatedReviews = shopReviews.filter(review => review._id !== reviewId);
     setShopReviews(updatedReviews);
+    toast.success("Review deleted successfully")
   };
 
   const handleBookmarkClick = () => {

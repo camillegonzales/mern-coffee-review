@@ -109,7 +109,6 @@ const ReviewContextProvider = ({ children }) => {
         dispatch({
           type: REVIEW_DELETION_SUCCESS,
         });
-        toast.success('Review deleted successfully');
       } else {
         dispatch({
           type: REVIEW_DELETION_FAIL,

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { URL_SHOPS } from '../../utils/URL';
 import { formatDate } from '../../utils/formatDate';
+// import toast from 'react-hot-toast';
 import { reviewContext } from '../../context/ReviewContext/ReviewContext';
 
 const UserReviews = ({ reviews, onDeleteReview }) => {
@@ -53,7 +54,7 @@ const UserReviews = ({ reviews, onDeleteReview }) => {
   return (
     <div>
       <h2>Reviews:</h2>
-      {reviews && reviews.length > 0 ? (
+      {localReviews && localReviews.length > 0 ? (
         <table>
           <thead>
             <tr>
@@ -69,7 +70,7 @@ const UserReviews = ({ reviews, onDeleteReview }) => {
             </tr>
           </thead>
           <tbody>
-            {reviews.map((review, index) => (
+            {localReviews.map((review, index) => (
               <tr key={index}>
                 <td>{formatDate(review.createdAt)}</td>
                 <td>{coffeeShops[review.coffeeShop]}</td>

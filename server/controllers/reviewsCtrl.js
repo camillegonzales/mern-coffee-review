@@ -49,15 +49,24 @@ const updateCoffeeShopRatings = async (coffeeShopId) => {
             throw new Error('Coffee shop not found');
         }
 
-        // Calculate average ratings
-        const averageRatings = calculateAverageRatings(coffeeShop.reviews);
+        if (coffeeShop.reviews && coffeeShop.reviews.length > 0) {
+            // Calculate average ratings
+            const averageRatings = calculateAverageRatings(coffeeShop.reviews);
 
-        // Update coffee shop with new ratings
-        coffeeShop.coffeeRating = averageRatings.coffeeRating;
-        coffeeShop.foodRating = averageRatings.foodRating;
-        coffeeShop.seatingRating = averageRatings.seatingRating;
-        coffeeShop.chargingRating = averageRatings.chargingRating;
-        coffeeShop.noiseRating = averageRatings.noiseRating;
+            // Update coffee shop with new ratings
+            coffeeShop.coffeeRating = averageRatings.coffeeRating;
+            coffeeShop.foodRating = averageRatings.foodRating;
+            coffeeShop.seatingRating = averageRatings.seatingRating;
+            coffeeShop.chargingRating = averageRatings.chargingRating;
+            coffeeShop.noiseRating = averageRatings.noiseRating;
+        } else {
+            // No reviews available, set ratings to 0
+            coffeeShop.coffeeRating = 0;
+            coffeeShop.foodRating = 0; 
+            coffeeShop.seatingRating = 0; 
+            coffeeShop.chargingRating = 0; 
+            coffeeShop.noiseRating = 0;
+        }
 
         // Save the updated coffee shop
         await coffeeShop.save();
@@ -211,8 +220,10 @@ const deleteReviewCtrl = async (req,res) => {
             $pull: { reviews: id }
         });
 
+        console.log("pre update avg ratings")
         // Update coffee shop ratings
         await updateCoffeeShopRatings(review.coffeeShop);
+        console.log("post avg ratings")
 
         // Delete the review from the database
         await Review.findByIdAndDelete(id);
