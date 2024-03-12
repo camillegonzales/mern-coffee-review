@@ -3,10 +3,13 @@ import axios from 'axios';
 import { URL_SHOPS } from '../utils/URL';
 import { useParams, useNavigate } from 'react-router-dom';
 import { authContext } from "../context/AuthContext/AuthContext";
+import ShopReviews from "../components/ShopProfile/ShopReviews";
 import toast from 'react-hot-toast';
+
 
 const ShopProfile = ({ match }) => {
   const [shop, setShop] = useState(null);
+  const [shopReviews, setShopReviews] = useState(null);
   const { id } = useParams();
   const { token } = useContext(authContext);
   const navigate = useNavigate();
@@ -16,6 +19,7 @@ const ShopProfile = ({ match }) => {
       try {
         const response = await axios.get(`${URL_SHOPS}/${id}`);
         setShop(response.data.data);
+        setShopReviews(response.data.data.reviews);
       } catch (error) {
         console.error('Error fetching shop:', error);
       }
@@ -34,6 +38,17 @@ const ShopProfile = ({ match }) => {
       localStorage.setItem('pendingShopId', shop._id);
       navigate('/login');
     }
+  };
+
+  const handleDeleteReview = async (reviewId) => {
+    const updatedReviews = shopReviews.filter(review => review._id !== reviewId);
+    setShopReviews(updatedReviews);
+
+    const response = await axios.get(`${URL_SHOPS}/${id}`);
+    const updatedShopData = response.data.data;
+
+    setShop(updatedShopData);
+    toast.success("Review deleted successfully")
   };
 
   const handleBookmarkClick = () => {
@@ -58,32 +73,15 @@ const ShopProfile = ({ match }) => {
       <img src={shop.image} alt={shop.name} />
       <p>Neighborhood: {shop.neighborhood.name}</p>
       <p>Address: {shop.address}</p>
-      <p>Coffee Rating: {shop.coffeeRating}</p>
-      <p>Food Rating: {shop.foodRating}</p>
-      <p>Seating Rating: {shop.seatingRating}</p>
-      <p>Charging Rating: {shop.chargingRating}</p>
-      <p>Noise Rating: {shop.noiseRating}</p>
+      <p>Coffee Rating: {shop.coffeeRating || "N/A"}</p>
+      <p>Food Rating: {shop.foodRating || "N/A"}</p>
+      <p>Seating Rating: {shop.seatingRating || "N/A"}</p>
+      <p>Charging Rating: {shop.chargingRating || "N/A"}</p>
+      <p>Noise Rating: {shop.noiseRating || "N/A"}</p>
 
       <h2>Reviews</h2>
       <button onClick={handleAddReviewClick}>Add Review</button>
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Rating</th>
-            <th>Comment</th>
-          </tr>
-        </thead>
-        <tbody>
-          {shop.reviews.map((review) => (
-            <tr key={review._id}>
-              <td>{review.user}</td>
-              <td>{review.rating}</td>
-              <td>{review.comment}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ShopReviews reviews={shopReviews} onDeleteReview={handleDeleteReview} />
     </div>
   );
 };

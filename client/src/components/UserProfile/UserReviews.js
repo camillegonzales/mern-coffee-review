@@ -1,18 +1,21 @@
 // UserReviews.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { URL_SHOPS } from '../../utils/URL';
 import { formatDate } from '../../utils/formatDate';
+// import toast from 'react-hot-toast';
+import { reviewContext } from '../../context/ReviewContext/ReviewContext';
 
-const UserReviews = ({ reviews }) => {
+const UserReviews = ({ reviews, onDeleteReview }) => {
   const [coffeeShops, setCoffeeShops] = useState({});
+  const [localReviews, setLocalReviews] = useState(reviews);
+  const { deleteReviewAction } = useContext(reviewContext); 
 
   useEffect(() => {
     const fetchCoffeeShops = async () => {
       try {
-        // Fetch coffee shop data for all review coffee shops
         const response = await axios.get(`${URL_SHOPS}`);
-        const coffeeShopsData = response.data;
+        const coffeeShopsData = response.data.data;
         const coffeeShopsMap = {};
         if (Array.isArray(coffeeShopsData)) {
           coffeeShopsData.forEach((coffeeShop) => {
@@ -31,10 +34,27 @@ const UserReviews = ({ reviews }) => {
     fetchCoffeeShops();
   }, []);
 
+  // Update local reviews state when reviews prop changes
+  useEffect(() => {
+    setLocalReviews(reviews);
+  }, [reviews]);
+
+  const handleDeleteReviewClick = async (reviewId) => {
+    try {
+      await deleteReviewAction(reviewId);
+      onDeleteReview(reviewId);
+
+      // Update local reviews state after deletion
+      setLocalReviews(localReviews.filter(review => review._id !== reviewId));
+    } catch (error) {
+      console.error('Error deleting review:', error);
+    }
+  };
+
   return (
     <div>
       <h2>Reviews:</h2>
-      {reviews && reviews.length > 0 ? (
+      {localReviews && localReviews.length > 0 ? (
         <table>
           <thead>
             <tr>
@@ -50,7 +70,7 @@ const UserReviews = ({ reviews }) => {
             </tr>
           </thead>
           <tbody>
-            {reviews.map((review, index) => (
+            {localReviews.map((review, index) => (
               <tr key={index}>
                 <td>{formatDate(review.createdAt)}</td>
                 <td>{coffeeShops[review.coffeeShop]}</td>
@@ -62,7 +82,7 @@ const UserReviews = ({ reviews }) => {
                 <td>{review.comment}</td>
                 <td>
                   <button>Edit</button>
-                  <button>Delete</button>
+                  <button onClick={() => handleDeleteReviewClick(review._id)}>Delete</button>
                 </td>
               </tr>
             ))}

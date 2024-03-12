@@ -82,7 +82,7 @@ const getShopsCtrl = async (req,res) => {
 // Get single coffee shop
 const getShopCtrl = async (req,res) => {
     try {
-        const coffeeShop = await CoffeeShop.findById(req.params.id).populate('neighborhood');
+        const coffeeShop = await CoffeeShop.findById(req.params.id).populate('neighborhood reviews');
         if (!coffeeShop) {
             return res.status(404).json({ error: "Coffee shop not found" });
         }

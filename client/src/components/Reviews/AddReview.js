@@ -1,22 +1,21 @@
-import { useNavigate, useParams } from "react-router-dom";
-import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
-import { URL_REVIEWS, URL_SHOPS } from "../../utils/URL";
-import toast from "react-hot-toast";
-import { authContext } from "../../context/AuthContext/AuthContext";
+import { useParams } from "react-router-dom";
+import { useContext, useState, useEffect } from 'react';
+import { reviewContext } from "../../context/ReviewContext/ReviewContext";
+import { URL_SHOPS } from "../../utils/URL";
+import axios from "axios";
 
 const AddReview = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const { userAuth } = useContext(authContext);
+  const { createReviewAction } = useContext(reviewContext);
   const [shop, setShop] = useState(null);
-
-  const [coffeeRating, setCoffeeRating] = useState('');
-  const [foodRating, setFoodRating] = useState('');
-  const [seatingRating, setSeatingRating] = useState('');
-  const [chargingRating, setChargingRating] = useState('');
-  const [noiseRating, setNoiseRating] = useState('');
-  const [comment, setComment] = useState('');
+  const [formData, setFormData] = useState({
+    coffeeRating: "",
+    foodRating: "",
+    seatingRating: "",
+    chargingRating: "",
+    noiseRating: "",
+    comment: ""
+  });
 
   useEffect(() => {
     const fetchShop = async () => {
@@ -31,32 +30,13 @@ const AddReview = () => {
     fetchShop();
   }, [id]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      console.log('handling submit')
-      const res = await axios.post(`${URL_REVIEWS}`, {
-        user: userAuth?.userFound?._id,
-        coffeeShop: shop._id,
-        coffeeRating,
-        foodRating,
-        seatingRating,
-        chargingRating,
-        noiseRating,
-        comment
-      });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-      if (res?.data?.status === 'success') {
-        console.log('Review added:', res.data);
-      // Redirect back to the shop profile page after successful review submission
-      navigate(`/shop/${shop._id}`)
-      } else {
-        toast.error(res.error)
-      }
-      
-    } catch (error) {
-      console.error('Error adding review:', error);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    createReviewAction({ coffeeShop: id, ...formData })
   };
 
   return (
@@ -75,8 +55,8 @@ const AddReview = () => {
                   type="radio"
                   name="coffeeRating"
                   value={value}
-                  checked={coffeeRating === value}
-                  onChange={(e) => setCoffeeRating(Number(e.target.value))}
+                  checked={formData.coffeeRating === String(value)}
+                  onChange={handleChange}
                 />
                 {value}
               </label>
@@ -91,8 +71,8 @@ const AddReview = () => {
                   type="radio"
                   name="foodRating"
                   value={value}
-                  checked={foodRating === value}
-                  onChange={(e) => setFoodRating(Number(e.target.value))}
+                  checked={formData.foodRating === String(value)}
+                  onChange={handleChange}
                 />
                 {value}
               </label>
@@ -107,8 +87,8 @@ const AddReview = () => {
                   type="radio"
                   name="seatingRating"
                   value={value}
-                  checked={seatingRating === value}
-                  onChange={(e) => setSeatingRating(Number(e.target.value))}
+                  checked={formData.seatingRating === String(value)}
+                  onChange={handleChange}
                 />
                 {value}
               </label>
@@ -123,8 +103,8 @@ const AddReview = () => {
                   type="radio"
                   name="chargingRating"
                   value={value}
-                  checked={chargingRating === value}
-                  onChange={(e) => setChargingRating(Number(e.target.value))}
+                  checked={formData.chargingRating === String(value)}
+                  onChange={handleChange}
                 />
                 {value}
               </label>
@@ -139,8 +119,8 @@ const AddReview = () => {
                   type="radio"
                   name="noiseRating"
                   value={value}
-                  checked={noiseRating === value}
-                  onChange={(e) => setNoiseRating(Number(e.target.value))}
+                  checked={formData.noiseRating === String(value)}
+                  onChange={handleChange}
                 />
                 {value}
               </label>
@@ -148,7 +128,7 @@ const AddReview = () => {
           </div>
             <div>
               <label>Comment:</label>
-              <textarea value={comment} onChange={(e) => setComment(e.target.value)} />
+              <textarea name="comment" value={formData.comment} onChange={handleChange} />
             </div>
             <button type="submit">Submit Review</button>
           </form>
