@@ -1,7 +1,7 @@
 // ShopReviews.js
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { URL_USER, URL_SHOPS } from '../../utils/URL';
+import { URL_USER } from '../../utils/URL';
 import { formatDate } from '../../utils/formatDate';
 import { authContext } from '../../context/AuthContext/AuthContext';
 import { reviewContext } from '../../context/ReviewContext/ReviewContext';

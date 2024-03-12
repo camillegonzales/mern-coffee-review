@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../context/AuthContext/AuthContext";
-import UserBookmarks from "../components/UserProfile/UserBookmarks";
+// import UserBookmarks from "../components/UserProfile/UserBookmarks";
 import UserReviews from "../components/UserProfile/UserReviews";
 import { formatDate } from "../utils/formatDate";
 import toast from "react-hot-toast";
@@ -12,7 +12,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     fetchProfileAction();
-  }, []);
+  });
 
   // Format createdAt date
   useEffect(() => {
@@ -38,7 +38,7 @@ const UserProfile = () => {
       <p>Email: {profile?.email}</p>
       <p>Joined: {formattedCreatedAt}</p>
 
-      <UserBookmarks bookmarks={profile?.bookmarks} />
+      {/* <UserBookmarks bookmarks={profile?.bookmarks} /> */}
       <UserReviews reviews={userReviews} onDeleteReview={handleDeleteReview} />
     </>
   );
