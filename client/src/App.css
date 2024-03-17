@@ -119,6 +119,7 @@ a:visited {}
 /*  -----  Typography  ----- */
 h1 {
   font-family: "Caprasimo", serif;
+  margin-bottom: 4%;
 }
 
 /*  ----- Table ----- */
@@ -149,14 +150,6 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #ddd;
 }
-
-
-
-td:nth-child(1) {}
-colgroup {}
-data {}
-datalist {}
-
 
 /*  ----- Regsiter & Login Forms ----- */
 .form-container {
@@ -215,7 +208,7 @@ datalist {}
 
 /* ---- Search page ---- */
 .search-page {
-  margin: 4% 6%;
+  margin: 4%;
   font-size: large;
   text-align: center;
 }
@@ -247,6 +240,17 @@ datalist {}
   font-weight: bold;
   font-size: 90%;
 }
+
+/* ---- Profile page ---- */
+.profile {
+  text-align: center;
+  margin: 4%
+}
+
+.user-info {
+  margin-bottom: 4%;
+}
+
 
 /* ---- Smaller screen sizes ---- */
 @media screen and (max-width: 768px) {

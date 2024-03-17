@@ -33,15 +33,18 @@ const UserProfile = () => {
   };
 
   return (
-    <>
+    <div className="profile">
       <h1>Welcome, {profile?.userName}</h1>
-      <h2>User Information:</h2>
-      <p>Email: {profile?.email}</p>
-      <p>Joined: {formattedCreatedAt}</p>
+      <div className="user-info">
+        <h2>User Information:</h2>
+        <p>Email: {profile?.email}</p>
+        <p>Joined: {formattedCreatedAt}</p>
+      </div>
+      
 
       {/* <UserBookmarks bookmarks={profile?.bookmarks} /> */}
       <UserReviews reviews={userReviews} onDeleteReview={handleDeleteReview} />
-    </>
+    </div>
   );
 };
 
