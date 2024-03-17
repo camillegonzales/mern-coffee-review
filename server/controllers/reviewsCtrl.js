@@ -30,13 +30,23 @@ const calculateAverageRatings = (reviews) => {
         noiseRating: 0
     });
 
-    return {
+    const averageRatings = {
         coffeeRating: sum.coffeeRating / totalReviews,
         foodRating: sum.foodRating / totalReviews,
         seatingRating: sum.seatingRating / totalReviews,
         chargingRating: sum.chargingRating / totalReviews,
         noiseRating: sum.noiseRating / totalReviews
     };
+
+    const roundedRatings = {
+        coffeeRating: Math.round(averageRatings.coffeeRating * 2) / 2,
+        foodRating: Math.round(averageRatings.foodRating * 2) / 2,
+        seatingRating: Math.round(averageRatings.seatingRating * 2) / 2,
+        chargingRating: Math.round(averageRatings.chargingRating * 2) / 2,
+        noiseRating: Math.round(averageRatings.noiseRating * 2) / 2
+    };
+
+    return roundedRatings;
 };
 
 // Update coffee shop ratings
