@@ -20,18 +20,40 @@ body {
   font-family: "Signika", sans-serif;
 }
 
-/*  ----- Header -----  */
-header {}
+/* ----- Anchors ----- */
+.navbar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 15px 20px;
+}
 
+.logo {
+  margin: 0;
+  font-size: 24px;
+}
 
-/* ----- Anchors ----- Text links */
+.links {
+  display: flex;
+  gap: 50px; 
+}
+
+.links > * {
+  text-decoration: none;
+  color: black; 
+  font-size: 18px; 
+}
+
+.links > *:hover {
+  color: var(--cobaltBlue); /* Change link color on hover */
+}
 a {}
 a:link {}
 a:hover {}
 a:active {}
 a:visited {}
 
-/*  ----- Navigation ----- Override text links for navigation only.  */
+/*  ----- Navigation ----- */
 nav {}
 nav a {}
 nav a:hover {}
@@ -115,7 +137,7 @@ datalist {}
   text-align: center;
 }
 
-.form input, select, textarea {
+.form input {
   font-size: 90%;
   padding: 2%;
   margin-bottom: 4%;

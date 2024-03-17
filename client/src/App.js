@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import './App.css';
-import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import Register from './pages/Register';
@@ -16,7 +15,6 @@ import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <>
-      <Header />
       <Navbar />
       <Toaster position='bottom-right' toastOptions={{duration: 4000}} />
       <Routes>
