@@ -66,11 +66,11 @@ const UserReviews = ({ reviews, onDeleteReview }) => {
             <tr>
               <th>Created At</th>
               <th>Coffee Shop</th>
-              <th>Coffee Rating</th>
-              <th>Food Rating</th>
-              <th>Seating Rating</th>
-              <th>Charging Rating</th>
-              <th>Noise Rating</th>
+              <th>Coffee</th>
+              <th>Food</th>
+              <th>Seating</th>
+              <th>Charging</th>
+              <th>Noise</th>
               <th>Comment</th>
               <th>Actions</th>
             </tr>

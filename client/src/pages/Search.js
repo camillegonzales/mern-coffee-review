@@ -60,7 +60,6 @@ const SearchPage = () => {
     <div className='search-page'>
       <h1>Search Page</h1>
       <form className='search-form' onSubmit={handleFormSubmit}>
-        <div>
           <label>Neighborhood:</label>
           <select className='form-object' value={selectedNeighborhood} onChange={handleNeighborhoodChange}>
             <option value="">All Neighborhoods</option>
@@ -68,9 +67,6 @@ const SearchPage = () => {
               <option key={neighborhood._id} value={neighborhood._id}>{neighborhood.name}</option>
             ))}
           </select>
-        </div>
-
-        <div>
           <label>Rating Type:</label>
           <select className='form-object' value={selectedRatingType} onChange={handleRatingTypeChange}>
             <option value="">All Ratings</option>
@@ -80,7 +76,6 @@ const SearchPage = () => {
             <option value="chargingRating">Charging Rating</option>
             <option value="noiseRating">Noise Rating</option>
           </select>
-        </div>
         <button className='search-button' type="submit">Search</button>
       </form>
 
@@ -88,13 +83,13 @@ const SearchPage = () => {
         <table>
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Coffee Shop</th>
               <th>Neighborhood</th>
-              <th>Coffee Rating</th>
-              <th>Food Rating</th>
-              <th>Seating Rating</th>
-              <th>Charging Rating</th>
-              <th>Noise Rating</th>
+              <th>Coffee</th>
+              <th>Food</th>
+              <th>Seating</th>
+              <th>Charging</th>
+              <th>Noise</th>
             </tr>
           </thead>
           <tbody>

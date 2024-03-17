@@ -122,16 +122,37 @@ h1 {
 }
 
 /*  ----- Table ----- */
-table {}
+table {
+  width: 95%;
+  text-align: center;
+  border-collapse: collapse;
+  margin: 1% auto;
+}
 caption {}
 thead {}
 tbody {}
 tfoot {}
-tr {}
-  tr:nth-child(even) {}
-th {}
-td {}
-  td:nth-child(1) {}
+
+th {
+  background-color: var(--mustard);
+  padding: 0.7%;
+}
+
+td {
+  padding: 0.9%;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+
+
+td:nth-child(1) {}
 colgroup {}
 data {}
 datalist {}
@@ -195,20 +216,20 @@ datalist {}
 /* ---- Search page ---- */
 .search-page {
   margin: 4% 6%;
+  font-size: large;
+  text-align: center;
 }
 
 .search-page h1 {
-  text-align: center;
   margin-bottom: 4%;
 }
 
 .search-form {
-  margin-bottom: 5%;
-  font-size: large;
+  margin-bottom: 3%;
 } 
 
 .form-object {
-  margin-bottom: 2%;
+  margin-right: 2%;
 }
 
 .search-form select {
