@@ -1,7 +1,7 @@
 import React from "react";
-import mascotImage from "../images/STB-mascot.png";
-import sunImage from "../images/STB-sun.png";
-import ratingsImage from "../images/STB-ratings.png";
+import mascotImage from "../images/STB/STB-mascot.png";
+import sunImage from "../images/STB/STB-sun.png";
+import ratingsImage from "../images/STB/STB-ratings.png";
 
 const HomePage = () => {
     return (
