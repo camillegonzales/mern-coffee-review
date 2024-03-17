@@ -128,6 +128,10 @@ h1 {
   margin-bottom: 4%;
 }
 
+h2 {
+  margin-bottom: 2%;
+}
+
 /*  ----- Table ----- */
 table {
   width: 95%;
@@ -255,6 +259,46 @@ tr:hover {
   padding: 1%;
   margin-left: auto;
   margin-right: auto;
+}
+
+/*-- Add & edit review forms ----*/
+.review-form {
+  border: 2px solid var(--darkBrown);
+  border-radius: 8px;
+  padding: 2%;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.review-form input, .textarea {
+  margin-bottom: 2%;
+}
+
+.review-form label {
+  padding-top: 2%;
+  padding-bottom: 1%;
+}
+
+.textarea label {
+  display: block;
+  margin-bottom: 1%; 
+  margin-top: 2%;
+}
+
+.textarea textarea {
+  width: 50%;
+  padding: 2%;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1%;
+}
+
+.ratings {
+  display: block;
+}
+
+.radio-label {
+  margin-right: 2%;
 }
 
 /* ---- Smaller screen sizes ---- */

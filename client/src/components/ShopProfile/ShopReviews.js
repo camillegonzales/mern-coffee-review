@@ -77,7 +77,7 @@ const ShopReviews = ({ reviews, onDeleteReview, shopID }) => {
                 <td>{review.seatingRating}</td>
                 <td>{review.chargingRating}</td>
                 <td>{review.noiseRating}</td>
-                <td className='comment'>{review.comment}</td>
+                <td>{review.comment}</td>
                 <td>
                     { userAuth && JSON.parse(localStorage.getItem('userAuth'))?.userFound?._id  === review.user && (
                         <>

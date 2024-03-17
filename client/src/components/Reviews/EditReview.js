@@ -49,101 +49,107 @@ const EditReview = () => {
   };
 
   return (
-    <div>
-      <h1>Edit Review</h1>
-      {review && coffeeShop && formData ? (
-        <>
-          <p>Coffee shop: {coffeeShop.name}</p>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Coffee Rating:</label>
-              {[1, 2, 3, 4, 5].map((value) => (
-                <label key={value}>
-                  <input
-                    type="radio"
-                    name="coffeeRating"
-                    value={value.toString()}
-                    checked={formData.coffeeRating === value.toString()}
-                    onChange={handleChange}
-                  />
-                  {value}
-                </label>
-              ))}
-            </div>
-            <div>
-              <label>Food Rating:</label>
-              {[1, 2, 3, 4, 5].map((value) => (
-                <label key={value}>
-                  <input
-                    type="radio"
-                    name="foodRating"
-                    value={value.toString()}
-                    checked={formData.foodRating === value.toString()}
-                    onChange={handleChange}
-                  />
-                  {value}
-                </label>
-              ))}
-            </div>
-            <div>
-              <label>Seating Rating:</label>
-              {[1, 2, 3, 4, 5].map((value) => (
-                <label key={value}>
-                  <input
-                    type="radio"
-                    name="seatingRating"
-                    value={value.toString()}
-                    checked={formData.seatingRating === value.toString()}
-                    onChange={handleChange}
-                  />
-                  {value}
-                </label>
-              ))}
-            </div>
-            <div>
-              <label>Charging Rating:</label>
-              {[1, 2, 3, 4, 5].map((value) => (
-                <label key={value}>
-                  <input
-                    type="radio"
-                    name="chargingRating"
-                    value={value.toString()}
-                    checked={formData.chargingRating === value.toString()}
-                    onChange={handleChange}
-                  />
-                  {value}
-                </label>
-              ))}
-            </div>
-            <div>
-              <label>Noise Rating:</label>
-              {[1, 2, 3, 4, 5].map((value) => (
-                <label key={value}>
-                  <input
-                    type="radio"
-                    name="noiseRating"
-                    value={value.toString()}
-                    checked={formData.noiseRating === value.toString()}
-                    onChange={handleChange}
-                  />
-                  {value}
-                </label>
-              ))}
-            </div>
-            <div>
-              <label>Comment:</label>
-              <textarea
-                name="comment"
-                value={formData.comment}
-                onChange={handleChange}
-              />
-            </div>
-            <button type="submit">Submit Review</button>
-          </form>
-        </>
-      ) : (
-        <p>Loading review data...</p>
-      )}
+    <div className="page">
+        <h1>Edit Review</h1>
+        {review && coffeeShop && formData ? (
+          <div className="review-form">
+            <h2>{coffeeShop.name}</h2>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label className="ratings">Coffee Rating:</label>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <label key={value} className="radio-label">
+                    <input
+                      type="radio"
+                      name="coffeeRating"
+                      value={value.toString()}
+                      checked={formData.coffeeRating === value.toString()}
+                      onChange={handleChange}
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+
+              <div>
+                <label className="ratings">Food Rating:</label>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <label key={value} className="radio-label">
+                    <input
+                      type="radio"
+                      name="foodRating"
+                      value={value.toString()}
+                      checked={formData.foodRating === value.toString()}
+                      onChange={handleChange}
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+
+              <div>
+                <label className="ratings">Seating Rating:</label>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <label key={value} className="radio-label">
+                    <input
+                      type="radio"
+                      name="seatingRating"
+                      value={value.toString()}
+                      checked={formData.seatingRating === value.toString()}
+                      onChange={handleChange}
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+
+              <div>
+                <label className="ratings">Charging Rating:</label>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <label key={value} className="radio-label">
+                    <input
+                      type="radio"
+                      name="chargingRating"
+                      value={value.toString()}
+                      checked={formData.chargingRating === value.toString()}
+                      onChange={handleChange}
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+
+              <div>
+                <label className="ratings">Noise Rating:</label>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <label key={value} className="radio-label">
+                    <input
+                      type="radio"
+                      name="noiseRating"
+                      value={value.toString()}
+                      checked={formData.noiseRating === value.toString()}
+                      onChange={handleChange}
+                    />
+                    {value}
+                  </label>
+                ))}
+              </div>
+
+              <div className="textarea">
+                <label>Comment:</label>
+                <textarea
+                  name="comment"
+                  value={formData.comment}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <button className="search-button" type="submit">Submit Review</button>
+            </form>
+          </div>
+        ) : (
+          <p>Loading review data...</p>
+        )}
     </div>
   );
 };

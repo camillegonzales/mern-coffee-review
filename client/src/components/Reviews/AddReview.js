@@ -40,17 +40,16 @@ const AddReview = () => {
   };
 
   return (
-    <div>
+    <div className="page">
       <h1>Rate & Review</h1>
       {shop ? (
-        <>
-          <p>Coffee shop: {shop.name}</p>
+        <div className="review-form">
+          <h2>{shop.name}</h2>
           <form onSubmit={handleSubmit}>
-
           <div>
-            <label>Coffee Rating:</label>
+            <label className="ratings">Coffee Rating:</label>
             {[1, 2, 3, 4, 5].map((value) => (
-              <label key={value}>
+              <label key={value} className="radio-label">
                 <input
                   type="radio"
                   name="coffeeRating"
@@ -64,9 +63,9 @@ const AddReview = () => {
           </div>
 
           <div>
-            <label>Food Rating:</label>
+            <label className="ratings">Food Rating:</label>
             {[1, 2, 3, 4, 5].map((value) => (
-              <label key={value}>
+              <label key={value} className="radio-label">
                 <input
                   type="radio"
                   name="foodRating"
@@ -80,9 +79,9 @@ const AddReview = () => {
           </div>
 
           <div>
-            <label>Seating Rating:</label>
+            <label className="ratings">Seating Rating:</label>
             {[1, 2, 3, 4, 5].map((value) => (
-              <label key={value}>
+              <label key={value} className="radio-label">
                 <input
                   type="radio"
                   name="seatingRating"
@@ -96,9 +95,9 @@ const AddReview = () => {
           </div>
 
           <div>
-            <label>Charging Rating:</label>
+            <label className="ratings">Charging Rating:</label>
             {[1, 2, 3, 4, 5].map((value) => (
-              <label key={value}>
+              <label key={value} className="radio-label">
                 <input
                   type="radio"
                   name="chargingRating"
@@ -112,9 +111,9 @@ const AddReview = () => {
           </div>
 
           <div>
-            <label>Noise Rating:</label>
+            <label className="ratings">Noise Rating:</label>
             {[1, 2, 3, 4, 5].map((value) => (
-              <label key={value}>
+              <label key={value} className="radio-label">
                 <input
                   type="radio"
                   name="noiseRating"
@@ -126,13 +125,15 @@ const AddReview = () => {
               </label>
             ))}
           </div>
-            <div>
-              <label>Comment:</label>
-              <textarea name="comment" value={formData.comment} onChange={handleChange} />
-            </div>
-            <button type="submit">Submit Review</button>
+
+          <div className="textarea">
+            <label>Comment:</label>
+            <textarea name="comment" value={formData.comment} onChange={handleChange} />
+          </div>
+
+            <button className="search-button" type="submit">Submit Review</button>
           </form>
-      </>
+      </div>
       ) : (
         <p>Loading shop data...</p>
       )}
