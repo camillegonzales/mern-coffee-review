@@ -1,6 +1,7 @@
 import React from "react";
 import mascotImage from "../images/STB-mascot.png";
 import sunImage from "../images/STB-sun.png";
+import ratingsImage from "../images/STB-ratings.png";
 
 const HomePage = () => {
     return (
@@ -17,8 +18,11 @@ const HomePage = () => {
             <img src={sunImage} alt="Spill The Beans sun character" width="100" height="80"></img>
         </div>
         <div className="about-ratings">
-            <p>HELP ME</p>
+            <img src={ratingsImage} alt="idk"></img>
         </div>
+        <footer>
+            <p>Spill The Beans &copy;2024</p>
+        </footer>
         </>
     );
 };

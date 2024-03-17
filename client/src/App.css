@@ -26,6 +26,12 @@ body {
   text-align: center;
 }
 
+footer {
+  text-align: center;
+  font-size: 1vw;
+  max-height: fit-content;
+}
+
 /*  ----- Navigation ----- */
 .navbar {
   display: flex;
@@ -216,9 +222,10 @@ tr:hover {
   height: auto; 
 }
 
-.about-ratings {
-  height: 30vh;
-  background-color: var(--mustard);
+.about-ratings img {
+  min-width: 100%;
+  width: 100vw;
+  height: auto; 
 }
 
 /*  ----- Regsiter & Login Forms ----- */
