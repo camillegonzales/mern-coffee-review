@@ -20,6 +20,12 @@ body {
   font-family: "Signika", sans-serif;
 }
 
+.page {
+  margin: 4%;
+  font-size: large;
+  text-align: center;
+}
+
 /*  ----- Navigation ----- */
 .navbar {
   display: flex;
@@ -129,18 +135,20 @@ table {
   border-collapse: collapse;
   margin: 1% auto;
 }
-caption {}
-thead {}
-tbody {}
-tfoot {}
 
 th {
   background-color: var(--mustard);
   padding: 0.7%;
 }
 
+tbody {
+  font-size: 95%;
+}
+
 td {
-  padding: 0.9%;
+  padding: 1%;
+  white-space: nowrap;
+  word-wrap: break-word;
 }
 
 tr:nth-child(even) {
@@ -207,16 +215,6 @@ tr:hover {
 }
 
 /* ---- Search page ---- */
-.search-page {
-  margin: 4%;
-  font-size: large;
-  text-align: center;
-}
-
-.search-page h1 {
-  margin-bottom: 4%;
-}
-
 .search-form {
   margin-bottom: 3%;
 } 
@@ -242,15 +240,22 @@ tr:hover {
 }
 
 /* ---- Profile page ---- */
-.profile {
-  text-align: center;
-  margin: 4%
-}
-
 .user-info {
   margin-bottom: 4%;
 }
 
+/* ---- Shop profile page ---- */
+.shop-info, .shop-ratings {
+  margin-bottom: 3%;
+}
+
+.shop-ratings {
+  border: 2px solid var(--darkBrown);
+  width: fit-content;
+  padding: 1%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* ---- Smaller screen sizes ---- */
 @media screen and (max-width: 768px) {

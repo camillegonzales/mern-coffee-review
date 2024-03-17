@@ -67,20 +67,26 @@ const ShopProfile = ({ match }) => {
   }
 
   return (
-    <div>
+    <div className='page'>
       <h1>{shop.name}</h1>
       {/* <button onClick={handleBookmarkClick}>Bookmark</button> */}
       <img src={shop.image} alt={shop.name} />
-      <p>Neighborhood: {shop.neighborhood.name}</p>
-      <p>Address: {shop.address}</p>
-      <p>Coffee Rating: {shop.coffeeRating || "N/A"}</p>
-      <p>Food Rating: {shop.foodRating || "N/A"}</p>
-      <p>Seating Rating: {shop.seatingRating || "N/A"}</p>
-      <p>Charging Rating: {shop.chargingRating || "N/A"}</p>
-      <p>Noise Rating: {shop.noiseRating || "N/A"}</p>
+      <div className='shop-info'>
+        <p>Neighborhood: {shop.neighborhood.name}</p>
+        <p>Address: {shop.address}</p>
+      </div>
+      
+      <div className='shop-ratings'>
+        <p>Coffee Rating: {shop.coffeeRating || "N/A"}</p>
+        <p>Food Rating: {shop.foodRating || "N/A"}</p>
+        <p>Seating Rating: {shop.seatingRating || "N/A"}</p>
+        <p>Charging Rating: {shop.chargingRating || "N/A"}</p>
+        <p>Noise Rating: {shop.noiseRating || "N/A"}</p>
+      </div>
+      
 
-      <h2>Reviews</h2>
-      <button onClick={handleAddReviewClick}>Add Review</button>
+      <h2>Reviews:</h2>
+      <button className='search-button' onClick={handleAddReviewClick}>Add Review</button>
       <ShopReviews reviews={shopReviews} onDeleteReview={handleDeleteReview} shopID={shop.id} />
     </div>
   );

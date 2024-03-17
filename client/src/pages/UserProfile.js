@@ -33,7 +33,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="profile">
+    <div className="page">
       <h1>Welcome, {profile?.userName}</h1>
       <div className="user-info">
         <h2>User Information:</h2>

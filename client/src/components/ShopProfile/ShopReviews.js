@@ -58,11 +58,11 @@ const ShopReviews = ({ reviews, onDeleteReview, shopID }) => {
             <tr>
               <th>Created At</th>
               <th>Created By</th>
-              <th>Coffee Rating</th>
-              <th>Food Rating</th>
-              <th>Seating Rating</th>
-              <th>Charging Rating</th>
-              <th>Noise Rating</th>
+              <th>Coffee</th>
+              <th>Food</th>
+              <th>Seating</th>
+              <th>Charging</th>
+              <th>Noise</th>
               <th>Comment</th>
               <th>Actions</th>
             </tr>
@@ -77,7 +77,7 @@ const ShopReviews = ({ reviews, onDeleteReview, shopID }) => {
                 <td>{review.seatingRating}</td>
                 <td>{review.chargingRating}</td>
                 <td>{review.noiseRating}</td>
-                <td>{review.comment}</td>
+                <td className='comment'>{review.comment}</td>
                 <td>
                     { userAuth && JSON.parse(localStorage.getItem('userAuth'))?.userFound?._id  === review.user && (
                         <>
