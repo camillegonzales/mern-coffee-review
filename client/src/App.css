@@ -20,12 +20,12 @@ body {
   font-family: "Signika", sans-serif;
 }
 
-/* ----- Anchors ----- */
+/*  ----- Navigation ----- */
 .navbar {
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 15px 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
 }
 
 .logo {
@@ -33,73 +33,81 @@ body {
   font-size: 24px;
 }
 
-.links {
+.menu {
   display: flex;
-  gap: 50px; 
+  gap: 40px;
+  font-size: 18px;
 }
 
-.links > * {
+.menu a {
   text-decoration: none;
-  color: black; 
-  font-size: 18px; 
+  color: black;
 }
 
-.links > *:hover {
-  color: var(--cobaltBlue); /* Change link color on hover */
+.menu a:hover {
+  color: var(--cobaltBlue);
 }
+
+.menu.show {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1;
+  gap: 20px;
+}
+
+.menu.show a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+.menu.show a:hover {
+  color: var(--cobaltBlue)
+}
+
+.hamburger {
+  display: none; /* Hide hamburger by default */
+  cursor: pointer;
+}
+
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--cobaltBlue);
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+.open:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.open:nth-child(2) {
+  opacity: 0;
+}
+
+.open:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ----- Anchors ----- */
 a {}
 a:link {}
 a:hover {}
 a:active {}
 a:visited {}
 
-/*  ----- Navigation ----- */
-nav {}
-nav a {}
-nav a:hover {}
-
 /*  -----  Typography  ----- */
-p {}
-br {}
-ol, ul, dl {}
-li {}
-dt {}
-dd {}
-
-h1, h2, h3, h4, h5, h6 {} 
 h1 {
   font-family: "Caprasimo", serif;
 }
-h2 {}
-h3 {}
-h4 {}
-h5 {}
-h6 {}
-
-abbr {}
-acronym {}
-address {}
-blockquote {}
-  q {}
-  cite {}
-em {}
-hr {}
-mark {}
-s {}
-span {}
-strong {}
-sub {}
-sup {}
-time {}
-
-/*  ----- Coding or instructional typography ----- */
-pre {}
-code {}
-kbd {}
-samp {}
-var {}
-del {} 
-ins {}
 
 /*  ----- Table ----- */
 table {}
@@ -171,68 +179,21 @@ datalist {}
   color: white;
 }
 
-input {}
-select {}
-  optgroup {}
-  option {}
-textarea {}
-output {}
-meter {}
-progress {}
-
-
-/* ----- Media ----- */
-figure {}
-  figcaption {}
-  figure img {}
-svg {}
-picture {}
-  source {}
-iframe {}
-video {}
-audio {}
-embed {}
-object {}
-/*  ----- Classes for alignment, positioning, widths, grids, embellishments, and animation -----  */
-.gallery {}
-
-.floatright {}
-.floatleft {}
-.center-middle {}
-
-.ten {}
-.twenty {}
-.thirty {}
-.forty {}
-.fifty {}
-.sixty {}
-.seventy {}
-.eighty {}
-
-.radius {}
-.circle {}
-.boxshadow {}
-.tshadow {} 
-.gradient {}
-.shape {}
-
-@keyframes App-logo {}
-
+/* ---- Smaller screen sizes ---- */
 @media screen and (max-width: 768px) {
   .form-container {
-    padding: 10%; /* Adjust padding to make the container smaller */
+    padding: 10%; 
   }
 
   .form {
-    padding: 10%; /* Adjust padding to make the form smaller */
+    padding: 10%; 
+  }
+
+  .menu {
+    display: none; 
+  }
+
+  .hamburger {
+    display: block; 
   }
 }
-
-/*   ===== TABLET  media query overrides mobile styles ===== */
-@media all and (min-width: 600px) {}
-
-/*   ===== DESKTOP  media query overrides mobile and tablet styles ===== */
-@media all and (min-width: 1080px) {}
-
-/*   ===== PRINT  media query overrides previous styles =====  */
-@media print {}
