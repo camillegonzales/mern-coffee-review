@@ -341,7 +341,12 @@ tr:hover {
 
 .review-form label {
   padding-top: 2%;
-  padding-bottom: 1%;
+}
+
+.ratings-key {
+  color: var(--darkBrown);
+  font-size: smaller;
+  padding: 0;
 }
 
 .textarea label {

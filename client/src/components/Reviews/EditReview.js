@@ -57,6 +57,10 @@ const EditReview = () => {
             <form onSubmit={handleSubmit}>
               <div>
                 <label className="ratings">Coffee Rating:</label>
+                <div className="ratings-key">
+                  <p>1 = Appealing as a cup of lukewarm dishwater.</p>
+                  <p>5 = A sip of heaven in every cup!</p>
+                </div>
                 {[1, 2, 3, 4, 5].map((value) => (
                   <label key={value} className="radio-label">
                     <input
@@ -73,6 +77,10 @@ const EditReview = () => {
 
               <div>
                 <label className="ratings">Food Rating:</label>
+                <div className="ratings-key">
+                  <p>1 = Tastebuds, beware!.</p>
+                  <p>5 = A culinary masterpiece.</p>
+                </div>
                 {[1, 2, 3, 4, 5].map((value) => (
                   <label key={value} className="radio-label">
                     <input
@@ -89,6 +97,10 @@ const EditReview = () => {
 
               <div>
                 <label className="ratings">Seating Rating:</label>
+                <div className="ratings-key">
+                  <p>1 = Standing room only.</p>
+                  <p>5 = First class seating.</p>
+                </div>
                 {[1, 2, 3, 4, 5].map((value) => (
                   <label key={value} className="radio-label">
                     <input
@@ -105,6 +117,10 @@ const EditReview = () => {
 
               <div>
                 <label className="ratings">Charging Rating:</label>
+                <div className="ratings-key">
+                  <p>1 = Charging purgatory.</p>
+                  <p>5 = All devices are juiced up.</p>
+                </div>
                 {[1, 2, 3, 4, 5].map((value) => (
                   <label key={value} className="radio-label">
                     <input
@@ -121,6 +137,10 @@ const EditReview = () => {
 
               <div>
                 <label className="ratings">Noise Rating:</label>
+                <div className="ratings-key">
+                  <p>1 = Quiet as a library... during a rock concert.</p>
+                  <p>5 = Like wearing noise-cancelling headphones.</p>
+                </div>
                 {[1, 2, 3, 4, 5].map((value) => (
                   <label key={value} className="radio-label">
                     <input
