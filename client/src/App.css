@@ -98,7 +98,9 @@ body {
 }
 
 /* ----- Anchors ----- */
-a {}
+a {
+  color: var(--darkBrown);
+}
 a:link {}
 a:hover {}
 a:active {}
