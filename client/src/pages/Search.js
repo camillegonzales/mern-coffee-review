@@ -57,21 +57,22 @@ const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className='search-page'>
       <h1>Search Page</h1>
-      <form onSubmit={handleFormSubmit}>
+      <form className='search-form' onSubmit={handleFormSubmit}>
         <div>
           <label>Neighborhood:</label>
-          <select value={selectedNeighborhood} onChange={handleNeighborhoodChange}>
+          <select className='form-object' value={selectedNeighborhood} onChange={handleNeighborhoodChange}>
             <option value="">All Neighborhoods</option>
             {neighborhoods.map((neighborhood) => (
               <option key={neighborhood._id} value={neighborhood._id}>{neighborhood.name}</option>
             ))}
           </select>
         </div>
+
         <div>
           <label>Rating Type:</label>
-          <select value={selectedRatingType} onChange={handleRatingTypeChange}>
+          <select className='form-object' value={selectedRatingType} onChange={handleRatingTypeChange}>
             <option value="">All Ratings</option>
             <option value="coffeeRating">Coffee Rating</option>
             <option value="foodRating">Food Rating</option>
@@ -80,8 +81,9 @@ const SearchPage = () => {
             <option value="noiseRating">Noise Rating</option>
           </select>
         </div>
-        <button type="submit">Search</button>
+        <button className='search-button' type="submit">Search</button>
       </form>
+
       {showTable && (
         <table>
           <thead>
@@ -99,7 +101,7 @@ const SearchPage = () => {
             {coffeeShops.map((coffeeShop) => (
               <tr key={coffeeShop._id}>
                 <td><Link to={`/shop/${coffeeShop._id}`}>{coffeeShop.name}</Link></td>
-                <td>{coffeeShop.neighborhood.name}</td> {/* Assuming neighborhood object has 'name' property */}
+                <td>{coffeeShop.neighborhood.name}</td> 
                 <td>{coffeeShop.coffeeRating || 'N/A'}</td>
                 <td>{coffeeShop.foodRating || 'N/A'}</td>
                 <td>{coffeeShop.seatingRating || 'N/A'}</td>

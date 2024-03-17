@@ -137,7 +137,7 @@ data {}
 datalist {}
 
 
-/*  ----- Form ----- */
+/*  ----- Regsiter & Login Forms ----- */
 .form-container {
   height: 100vh;
   display: flex;
@@ -173,10 +173,11 @@ datalist {}
 .form-button {
   display: block;
   width: 60%;
-  border-radius:10px;
+  border-radius: 10px;
   background-color: var(--mustard);
-  font-weight:bold;
-  font-size: 90%;
+  font-size: 100%;
+  font-family: inherit;
+  font-weight: bold;
   border: 2px solid;
   border-radius: 8px;
   margin-bottom: 10%;
@@ -189,6 +190,41 @@ datalist {}
 .form-button:hover {
   background-color: var(--darkBrown);
   color: white;
+}
+
+/* ---- Search page ---- */
+.search-page {
+  margin: 4% 6%;
+}
+
+.search-page h1 {
+  text-align: center;
+  margin-bottom: 4%;
+}
+
+.search-form {
+  margin-bottom: 5%;
+  font-size: large;
+} 
+
+.form-object {
+  margin-bottom: 2%;
+}
+
+.search-form select {
+  padding: 0.2%;
+  margin-bottom: 1%;
+}
+
+.search-form label {
+  margin-right: 1%;
+}
+
+.search-button {
+  border-radius: 10px;
+  background-color: var(--mustard);
+  font-weight: bold;
+  font-size: 90%;
 }
 
 /* ---- Smaller screen sizes ---- */
