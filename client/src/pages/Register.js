@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { authContext } from "../context/AuthContext/AuthContext";
 
 const Register = () => {
-  const {registerUserAction, error} = useContext(authContext);
+  const { registerUserAction } = useContext(authContext);
   // Form data
   const [formData, setFormData] = useState({
     userName: '',
@@ -26,7 +26,8 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className="form-container">
+      <div className="form">
           <h1>Register for an account</h1>
           <form onSubmit={onSubmitHandler}>
               <label>Full Name</label>
@@ -56,9 +57,10 @@ const Register = () => {
                 placeholder='Enter password...' 
               />
 
-              <button type='submit'>Sign up</button>
+              <button className="form-button" type='submit'>Sign up</button>
         </form>
         <p>Already have an account? <Link to='/login'>Sign in</Link></p>
+      </div>
     </div>
   );
 };

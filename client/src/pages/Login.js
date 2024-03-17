@@ -27,7 +27,8 @@ const Login = () => {
   console.log(userAuth);
 
   return (
-    <div>
+    <div className="form-container">
+      <div className="form">
         <h1>Log in to your account</h1>
         <form onSubmit={onSubmitHandler}>
           <label>Email</label>
@@ -48,9 +49,10 @@ const Login = () => {
             placeholder='Enter password...' 
           />
 
-          <button type='submit'>Login</button>
+          <button className="form-button" type='submit'>Login</button>
         </form>
         <p>Don't have an account? <Link to='/register'>Sign up</Link></p>
+      </div>
     </div>
   );
 };
