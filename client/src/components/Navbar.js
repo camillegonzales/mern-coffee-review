@@ -22,7 +22,7 @@ export default function Navbar() {
                 </>}
                 {token && <>
                     <Link to='/profile'>Profile</Link>
-                    <button onClick={logoutUserAction}>Log out</button>
+                    <button className='logout-button' onClick={logoutUserAction}>Log out</button>
                 </>}
             </div>
             <div className="hamburger" onClick={toggleMenu}>
