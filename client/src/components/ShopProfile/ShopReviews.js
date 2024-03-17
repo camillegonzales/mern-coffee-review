@@ -81,8 +81,8 @@ const ShopReviews = ({ reviews, onDeleteReview, shopID }) => {
                 <td>
                     { userAuth && JSON.parse(localStorage.getItem('userAuth'))?.userFound?._id  === review.user && (
                         <>
-                            <button onClick={() => handleEditReviewClick(review._id)}>Edit</button>
-                            <button onClick={() => handleDeleteReviewClick(review._id)}>Delete</button>
+                            <button onClick={() => handleEditReviewClick(review._id)}><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onClick={() => handleDeleteReviewClick(review._id)}><i class="fa-solid fa-trash-can"></i></button>
                         </>
                     )}
                 </td>
