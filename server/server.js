@@ -27,9 +27,8 @@ dbConnect();
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
 app.use(cors({
-    origin: 'https://spill-the-beans-hazel.vercel.app/'
+    origin: '*'
   }));
 
 // Routes
