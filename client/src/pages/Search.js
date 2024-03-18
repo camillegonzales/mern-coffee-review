@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import { URL_NEIGHBORHOODS, URL_SHOPS } from '../utils/URL';
+import { URL_NEIGHBORHOODS, URL_SHOPS } from '../utils/URL';
 
 const SearchPage = () => {
   const [neighborhoods, setNeighborhoods] = useState([]);
@@ -13,7 +13,7 @@ const SearchPage = () => {
   useEffect(() => {
     const fetchNeighborhoods = async () => {
       try {
-        const response = await axios.get("https://mern-coffee-review-backend.vercel.app/neighborhoods");
+        const response = await axios.get(URL_NEIGHBORHOODS);
         setNeighborhoods(response.data.data);
       } catch (error) {
         console.error('Error fetching neighborhoods:', error);
@@ -35,7 +35,7 @@ const SearchPage = () => {
         params.ratingType = selectedRatingType;
       }
 
-      const response = await axios.get("https://mern-coffee-review-backend.vercel.app/coffeeshops", { params });
+      const response = await axios.get(URL_SHOPS, { params });
       setCoffeeShops(response.data.data);
       setShowTable(true);
     } catch (error) {
@@ -57,7 +57,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div className='page'>
+    <div className='search-page'>
       <h1>Search Page</h1>
       <form className='search-form' onSubmit={handleFormSubmit}>
           <label>Neighborhood:</label>
