@@ -314,16 +314,38 @@ tr:hover {
 }
 
 /* ---- Shop profile page ---- */
-.shop-info, .shop-ratings {
+.shop-info {
   margin-bottom: 3%;
+}
+
+.shop-container {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
 }
 
 .shop-ratings {
   border: 2px solid var(--darkBrown);
   width: fit-content;
+  height: 200px;
   padding: 1%;
-  margin-left: auto;
-  margin-right: auto;
+  padding-bottom: 7%;
+}
+
+.img-container {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  width: 400px; 
+  height: 400px; 
+  overflow: hidden; 
+  margin-right: 1%;
+}
+
+.img-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 /*-- Add & edit review forms ----*/
