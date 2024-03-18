@@ -28,8 +28,11 @@ dbConnect();
 // Middlewares
 app.use(express.json());
 app.use(cors({
-    origin: 'https://spill-the-beans-hazel.vercel.app'
-  }));
+    origin: 'https://spill-the-beans-hazel.vercel.app',
+    allowedHeaders: '*',
+    methods: '*',
+    credentials: true,
+}));
 
 // Routes
 app.use("/users", usersRoute);
