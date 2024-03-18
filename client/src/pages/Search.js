@@ -57,7 +57,7 @@ const SearchPage = () => {
   };
 
   return (
-    <div className='search-page'>
+    <div className='page'>
       <h1>Search Page</h1>
       <form className='search-form' onSubmit={handleFormSubmit}>
           <label>Neighborhood:</label>
