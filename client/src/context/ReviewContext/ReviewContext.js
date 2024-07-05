@@ -115,7 +115,7 @@ const ReviewContextProvider = ({ children }) => {
   const deleteReviewAction = async (reviewId) => {
     const config = {
       headers: {
-        Authorization: `Bearer ${state?.token?.token}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('userAuth')).token}`,
         "Content-Type": "application/json",
       },
     };
@@ -140,7 +140,7 @@ const ReviewContextProvider = ({ children }) => {
   const updateReviewAction = async (formData) => {
     const config = {
       headers: {
-        Authorization: `Bearer ${state?.token?.token}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('userAuth')).token}`,
         "Content-Type": "application/json",
       },
     };
