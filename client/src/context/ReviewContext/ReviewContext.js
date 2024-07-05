@@ -87,7 +87,7 @@ const ReviewContextProvider = ({ children }) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${state?.token?.token}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('userAuth')).token}`,
       },
     };
     try {
